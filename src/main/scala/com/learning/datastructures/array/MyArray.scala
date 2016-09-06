@@ -1,8 +1,8 @@
-package com.learning.datastructures
+package com.learning.datastructures.array
 
 import scala.reflect.ClassTag
 
-class DynamicArray[T: ClassTag](initialCapacity: Int) {
+class MyArray[T: ClassTag](initialCapacity: Int) {
   private var capacity = initialCapacity
   private var array = Array.ofDim[T](capacity)
   private var index = 0
@@ -20,11 +20,24 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) {
   }
 
   // O(1)
-  def remove(): T = {
+  def removeLast(): T = {
     if (index == 0) {
       throw new IllegalStateException("Removing from empty array")
     }
     val element = array(index - 1)
+    index = index - 1
+    element
+  }
+
+  // O(n)
+  def remove(i: Int): T = {
+    if (index < i) {
+      throw new ArrayIndexOutOfBoundsException(i)
+    }
+    val element = array(i)
+    for (j <- i until index - 1) {
+      array(j) = array(j + 1)
+    }
     index = index - 1
     element
   }
@@ -56,8 +69,9 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) {
     }
   }
 
+  // O(n)
   override def equals(other: Any): Boolean = other match {
-    case that: DynamicArray[T] => array.sameElements(that.array)
+    case that: MyArray[T] => array.take(index).sameElements(that.array)
     case _ => false
   }
 
@@ -71,13 +85,13 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) {
   }
 
   override def toString: String = {
-    s"DynamicArray(${array.mkString(", ")})"
+    s"DynamicArray(${array.take(index).mkString(", ")})"
   }
 }
 
-object DynamicArray {
-  def apply[T: ClassTag](vs: T*): DynamicArray[T] = {
-    val array = new DynamicArray[T](vs.size)
+object MyArray {
+  def apply[T: ClassTag](vs: T*): MyArray[T] = {
+    val array = new MyArray[T](vs.size)
     vs.foreach(array.add)
     array
   }
