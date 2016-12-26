@@ -1,14 +1,14 @@
-package com.learning.sorting
+package com.learning.sorting.mutable
 
 /**
-  * Bubble sort
-  *  - Mutative implementation
-  *  - Stable
-  *  - Time complexity: O(n^^2)
-  *  - Space complexity: O(1)
+  * - Stable
+  * - Time complexity: O(n^^2)
+  * - Space complexity: O(1)
   */
-object Bubble {
-  def sort[T](xs: Array[T])(implicit o: Ordering[T]): Unit = {
+class BubbleSorter extends Sorter {
+  override def sort[T: Ordering](xs: Array[T]): Unit = optimizedSort[T](xs)
+
+  private def optimizedSort[T](xs: Array[T])(implicit o: Ordering[T]): Unit = {
     var hasSwapped = false
     var n = xs.length
     do {
@@ -25,7 +25,7 @@ object Bubble {
     } while (hasSwapped)
   }
 
-  def sort2[T](xs: Array[T])(implicit o: Ordering[T]): Unit = {
+  private def simpleSort[T](xs: Array[T])(implicit o: Ordering[T]): Unit = {
     for {
       i <- Range(xs.length - 1, 0, -1)
       j <- Range(0, i)
@@ -34,11 +34,5 @@ object Bubble {
         swap(xs, j, j + 1)
       }
     }
-  }
-
-  private def swap[T](xs: Array[T], i: Int, j: Int): Unit = {
-    val tmp = xs(j)
-    xs(j) = xs(i)
-    xs(i) = tmp
   }
 }
