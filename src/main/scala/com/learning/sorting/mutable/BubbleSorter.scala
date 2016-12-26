@@ -2,7 +2,10 @@ package com.learning.sorting.mutable
 
 /**
   * - Stable
-  * - Time complexity: O(n^^2)
+  * - Time complexity:
+  *   - Best: O(n) when the array is already sorted
+  *   - Average: O(n^^2)
+  *   - Worst: O(n^^2)
   * - Space complexity: O(1)
   */
 class BubbleSorter extends Sorter {

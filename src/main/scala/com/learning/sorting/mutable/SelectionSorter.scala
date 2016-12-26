@@ -2,7 +2,10 @@ package com.learning.sorting.mutable
 
 /**
   * - NOT Stable
-  * - Time complexity: O(n^^2)
+  * - Time complexity:
+  *   - Best: O(n^^2)
+  *   - Average: O(n^^2)
+  *   - Worst: O(n^^2)
   * - Space complexity: O(1)
   */
 class SelectionSorter extends Sorter {
