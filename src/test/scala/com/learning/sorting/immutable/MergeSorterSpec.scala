@@ -1,9 +1,10 @@
 package com.learning.sorting.immutable
 
+import com.learning.PropertySpecification
 import org.scalacheck.Prop.forAll
 
-class MergeSorterSpec extends SorterSpec {
-  override val sorter: Sorter = new MergeSorter
+class MergeSorterSpec extends PropertySpecification {
+  val sorter: Sorter = new MergeSorter
 
   "sorts the array in ascending order" in {
     forAll { (xs: Array[Int]) =>

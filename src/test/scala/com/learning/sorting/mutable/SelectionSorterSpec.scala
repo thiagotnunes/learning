@@ -1,9 +1,10 @@
 package com.learning.sorting.mutable
 
+import com.learning.PropertySpecification
 import org.scalacheck.Prop.forAll
 
-class SelectionSorterSpec extends SorterSpec {
-  override val sorter: Sorter = new SelectionSorter
+class SelectionSorterSpec extends PropertySpecification {
+  val sorter: Sorter = new SelectionSorter
 
   "sorts the array in ascending order" in {
     forAll { (xs: Array[Int]) =>
