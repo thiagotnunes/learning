@@ -2,13 +2,13 @@ package com.learning.datastructures.array
 
 import scala.reflect.ClassTag
 
-class MyArray[T: ClassTag](initialCapacity: Int) {
+class DynamicArray[T: ClassTag](initialCapacity: Int) {
   private var capacity = initialCapacity
   private var array = Array.ofDim[T](capacity)
   private var index = 0
 
   // O(1) on average
-  def add(e: T): Unit = {
+  def add(e: T): DynamicArray[T] = {
     if (index == capacity) {
       capacity = capacity * 2
       val newArray = Array.ofDim[T](capacity)
@@ -17,6 +17,8 @@ class MyArray[T: ClassTag](initialCapacity: Int) {
     }
     array(index) = e
     index = index + 1
+
+    this
   }
 
   // O(1)
@@ -61,17 +63,19 @@ class MyArray[T: ClassTag](initialCapacity: Int) {
   }
 
   // O(n)
-  def reverse(): Unit = {
+  def reverse(): DynamicArray[T] = {
     for (i <- 0 until (size / 2)) {
       val tmp = array(i)
       array(i) = array(size - 1 - i)
       array(size - 1 - i) = tmp
     }
+
+    this
   }
 
   // O(n)
   override def equals(other: Any): Boolean = other match {
-    case that: MyArray[T] => array.take(index).sameElements(that.array)
+    case that: DynamicArray[T] => array.take(index).sameElements(that.array)
     case _ => false
   }
 
@@ -89,9 +93,15 @@ class MyArray[T: ClassTag](initialCapacity: Int) {
   }
 }
 
-object MyArray {
-  def apply[T: ClassTag](vs: T*): MyArray[T] = {
-    val array = new MyArray[T](vs.size)
+object DynamicArray {
+  def apply[T: ClassTag](vs: T*): DynamicArray[T] = {
+    val array = new DynamicArray[T](vs.size)
+    vs.foreach(array.add)
+    array
+  }
+
+  def from[T: ClassTag](vs: Seq[T]): DynamicArray[T] = {
+    val array = new DynamicArray[T](vs.size)
     vs.foreach(array.add)
     array
   }
