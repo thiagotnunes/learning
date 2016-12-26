@@ -1,8 +1,7 @@
 package com.learning.sorting.mutable
 
-import scala.reflect.ClassTag
-
 /**
+  * - In place
   * - NOT Stable
   * - Time complexity:
   *   - Best: O(n^^2)
@@ -11,7 +10,7 @@ import scala.reflect.ClassTag
   * - Space complexity: O(1)
   */
 class SelectionSorter extends Sorter {
-  override def sort[T : ClassTag](xs: Array[T])(implicit o: Ordering[T]): Unit = {
+  override def sort[T](xs: Array[T])(implicit o: Ordering[T]): Unit = {
     var min = 0
     for { i <- Range(0, xs.length - 1) } yield {
       min = i

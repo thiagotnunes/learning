@@ -1,8 +1,7 @@
 package com.learning.sorting.mutable
 
-import scala.reflect.ClassTag
-
 /**
+  * - In place
   * - Stable
   * - Time complexity:
   *   - Best: O(n) when the input array is already sorted
@@ -11,7 +10,7 @@ import scala.reflect.ClassTag
   * - Space complexity: O(1)
   */
 class InsertionSorter extends Sorter {
-  override def sort[T: ClassTag](xs: Array[T])(implicit o: Ordering[T]): Unit = {
+  override def sort[T](xs: Array[T])(implicit o: Ordering[T]): Unit = {
     for {i <- Range(1, xs.length)} yield {
       var j = i
       while (j > 0 && o.lt(xs(j), xs(j - 1))) {
