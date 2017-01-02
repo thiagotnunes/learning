@@ -1,4 +1,4 @@
-package com.learning.sorting.mutable
+package com.learning.sorting.inplace
 
 import scala.util.Random
 

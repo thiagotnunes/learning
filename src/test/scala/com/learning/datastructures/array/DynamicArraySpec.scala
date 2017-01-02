@@ -51,7 +51,8 @@ class DynamicArraySpec extends PropertySpecification {
 
     "throws exception when removing from an empty array" in {
       val array = new DynamicArray[Int](1)
-      array.removeLast() must throwA[IllegalStateException]
+
+      array.removeLast() must throwA[ArrayIndexOutOfBoundsException]
     }
   }
 
@@ -98,16 +99,16 @@ class DynamicArraySpec extends PropertySpecification {
     }
   }
 
-  "equality" >> {
+  "equals and hashCode" >> {
     "two arrays with the same elements must be equal" in {
-      forAll { (xs: DynamicArray[Int]) =>
-        DynamicArray(xs) ==== DynamicArray(xs)
+      forAll { (xs: Seq[Int]) =>
+        DynamicArray.from(xs) ==== DynamicArray.from(xs)
       }
     }
 
     "two arrays with the same elements must have the same hash code" in {
-      forAll { (xs: DynamicArray[Int]) =>
-        DynamicArray(xs).hashCode() ==== DynamicArray(xs).hashCode()
+      forAll { (xs: Seq[Int]) =>
+        DynamicArray.from(xs).hashCode() ==== DynamicArray.from(xs).hashCode()
       }
     }
 

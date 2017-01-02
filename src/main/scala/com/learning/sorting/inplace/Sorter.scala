@@ -1,4 +1,4 @@
-package com.learning.sorting.mutable
+package com.learning.sorting.inplace
 
 trait Sorter {
   def sort[T](xs: Array[T])(implicit o: Ordering[T]): Unit

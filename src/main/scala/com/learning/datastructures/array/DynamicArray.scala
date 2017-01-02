@@ -24,11 +24,9 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) {
   // O(1)
   def removeLast(): T = {
     if (index == 0) {
-      throw new IllegalStateException("Removing from empty array")
+      throw new ArrayIndexOutOfBoundsException(0)
     }
-    val element = array(index - 1)
-    index = index - 1
-    element
+    remove(index - 1)
   }
 
   // O(n)
@@ -101,8 +99,6 @@ object DynamicArray {
   }
 
   def from[T: ClassTag](vs: Seq[T]): DynamicArray[T] = {
-    val array = new DynamicArray[T](vs.size)
-    vs.foreach(array.add)
-    array
+    apply(vs: _*)
   }
 }

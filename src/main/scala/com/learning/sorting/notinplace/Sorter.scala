@@ -1,4 +1,4 @@
-package com.learning.sorting.immutable
+package com.learning.sorting.notinplace
 
 import scala.reflect.ClassTag
 

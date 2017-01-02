@@ -1,4 +1,4 @@
-package com.learning.sorting.mutable
+package com.learning.sorting.inplace
 
 import com.learning.PropertySpecification
 import org.scalacheck.Prop.forAll

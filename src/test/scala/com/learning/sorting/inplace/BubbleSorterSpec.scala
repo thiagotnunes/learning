@@ -1,10 +1,10 @@
-package com.learning.sorting.mutable
+package com.learning.sorting.inplace
 
 import com.learning.PropertySpecification
 import org.scalacheck.Prop.forAll
 
-class QuickSorterSpec extends PropertySpecification {
-  val sorter: Sorter = new QuickSorter
+class BubbleSorterSpec extends PropertySpecification {
+  val sorter: Sorter = new BubbleSorter
 
   "sorts the array in ascending order" in {
     forAll { (xs: Array[Int]) =>
