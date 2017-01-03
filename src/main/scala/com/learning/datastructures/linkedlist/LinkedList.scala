@@ -66,18 +66,25 @@ class LinkedList[T] {
   }
 
   // O(n)
-  // also uses O(n) space
   def reverse(): LinkedList[T] = {
-    val reversedList = LinkedList[T]()
-    var p = head
-    for (_ <- 0 until size - 1) {
-      reversedList.add(p.value)
-      p = p.next
+    if (size == 0) {
+      this
+    } else {
+      var previous: Node[T] = null
+      var current: Node[T] = head
+      var next: Node[T] = null
+
+      do {
+        next = current.next
+        current.next = previous
+
+        previous = current
+        current = next
+      } while (current != null)
+      head = previous
+
+      this
     }
-
-    head = reversedList.head
-
-    this
   }
 
   // O(n)

@@ -110,8 +110,13 @@ class LinkedListSpec extends PropertySpecification {
 
   "reverse" >> {
     "returns the reversed list" in {
-      val list = LinkedList(1, 2, 3).reverse()
-      list ==== LinkedList(3, 2, 1)
+      LinkedList(1, 2, 3).reverse() ==== LinkedList(3, 2, 1)
+    }
+
+    "double reversing returns the original list" in {
+      forAll { (xs: Seq[Int]) =>
+        LinkedList.from(xs).reverse().reverse() ==== LinkedList.from(xs)
+      }
     }
   }
 
