@@ -6,54 +6,54 @@ import org.scalacheck.Arbitrary.arbitrary
 import org.scalacheck.Gen.{choose, nonEmptyListOf}
 import org.scalacheck.Prop.forAll
 
-class SinglyLinkedListSpec extends PropertySpecification {
+class LinkedListSpec extends PropertySpecification {
 
   implicit def arbitraryList[T: Arbitrary] = Arbitrary({
     for {
       xs <- Gen.listOf(arbitrary[T])
     } yield {
-      SinglyLinkedList.from(xs)
+      LinkedList.from(xs)
     }
   })
 
   "add" >> {
     "adds an element to the list" in {
-      val list = SinglyLinkedList[Int]()
+      val list = LinkedList[Int]()
       list.add(1)
 
       list.size ==== 1
-      list ==== SinglyLinkedList(1)
+      list ==== LinkedList(1)
     }
   }
 
   "size" >> {
     "size of a non-empty list is the number of elements within" in {
       forAll { (xs: Seq[Int]) =>
-        val list = SinglyLinkedList.from(xs)
+        val list = LinkedList.from(xs)
 
         list.size ==== xs.size
       }
     }
 
     "size of an empty list is 0" in {
-      SinglyLinkedList[Int]().size ==== 0
+      LinkedList[Int]().size ==== 0
     }
   }
 
   "removeFirst" >> {
     "removes the first element from the list" in {
       forAll(nonEmptyListOf(arbitrary[Int])) { (xs: List[Int]) =>
-        val list = SinglyLinkedList.from(xs)
+        val list = LinkedList.from(xs)
         val removed = list.removeFirst()
 
         removed ==== xs.head
         list.size ==== xs.size - 1
-        list ==== SinglyLinkedList.from(xs.tail)
+        list ==== LinkedList.from(xs.tail)
       }
     }
 
     "throws an exception when the list is empty" in {
-      SinglyLinkedList[Int]().removeFirst() must throwA[IndexOutOfBoundsException]
+      LinkedList[Int]().removeFirst() must throwA[IndexOutOfBoundsException]
     }
   }
 
@@ -67,28 +67,62 @@ class SinglyLinkedListSpec extends PropertySpecification {
       }
 
       forAll(nonEmptyListAndRandomIndex)({ case (xs, i) =>
-        val list = SinglyLinkedList.from(xs)
+        val list = LinkedList.from(xs)
         val removed = list.remove(i)
 
         removed ==== xs(i)
         list.size ==== xs.size - 1
-        list ==== SinglyLinkedList.from(xs.take(i) ++ xs.drop(i + 1))
+        list ==== LinkedList.from(xs.take(i) ++ xs.drop(i + 1))
       })
     }
 
-    "remove" in {
-      SinglyLinkedList(1).remove(0) ==== 1
+    "throws an exception when the list is empty" in {
+      LinkedList[Int]().remove(0) must throwA[IndexOutOfBoundsException]
+    }
+
+    "throws an exception when trying to remove non-existing index" in {
+      LinkedList(1, 2, 3).remove(3) must throwA[IndexOutOfBoundsException]
+    }
+  }
+
+  "get" >> {
+    "returns the element at the given position" in {
+      val nonEmptyListAndRandomIndex = for {
+        xs <- nonEmptyListOf(arbitrary[Int])
+        i <- choose(0, xs.size - 1)
+      } yield {
+        (xs, i)
+      }
+
+      forAll(nonEmptyListAndRandomIndex)({ case (xs, i) =>
+        LinkedList.from(xs).get(i) ==== xs(i)
+      })
+    }
+
+    "throws an exception when trying to get non-existing index" in {
+      LinkedList(1, 2, 3).get(3) must throwA[IndexOutOfBoundsException]
+    }
+
+    "throws an exception when trying to get from empty list" in {
+      LinkedList[Int]().get(0) must throwA[IndexOutOfBoundsException]
+    }
+  }
+
+  "reverse" >> {
+    "returns the reversed list" in {
+      val list = LinkedList(1, 2, 3).reverse()
+      list ==== LinkedList(3, 2, 1)
     }
   }
 
   "equals" >> {
     "two lists with no elements should be equal" in {
-      SinglyLinkedList() ==== SinglyLinkedList()
+      LinkedList() ==== LinkedList()
     }
 
     "two lists with same elements should be equal" in {
       forAll { (xs: Seq[Int]) =>
-        SinglyLinkedList.from(xs) ==== SinglyLinkedList.from(xs)
+        LinkedList.from(xs) ==== LinkedList.from(xs)
       }
     }
 
@@ -96,7 +130,7 @@ class SinglyLinkedListSpec extends PropertySpecification {
       forAll(nonEmptyListOf(arbitrary[Int]), nonEmptyListOf(arbitrary[Int])) {
         (xs: List[Int], ys: List[Int]) =>
           xs != ys ==>
-            (SinglyLinkedList.from(xs) !=== SinglyLinkedList.from(ys))
+            (LinkedList.from(xs) !=== LinkedList.from(ys))
       }
     }
   }
@@ -104,7 +138,7 @@ class SinglyLinkedListSpec extends PropertySpecification {
   "hashCode" in {
     "two lists with same elements should have the same hash code" in {
       forAll { (xs: Seq[Int]) =>
-        SinglyLinkedList.from(xs).hashCode ==== SinglyLinkedList.from(xs).hashCode
+        LinkedList.from(xs).hashCode ==== LinkedList.from(xs).hashCode
       }
     }
   }

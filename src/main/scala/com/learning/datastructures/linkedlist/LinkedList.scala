@@ -1,13 +1,13 @@
 package com.learning.datastructures.linkedlist
 
-import com.learning.datastructures.linkedlist.SinglyLinkedList.Node
+import com.learning.datastructures.linkedlist.LinkedList.Node
 
-class SinglyLinkedList[T] {
+class LinkedList[T] {
   private var currentSize: Int = 0
   private var head: Node[T] = _
 
   // O(1) for insertions in the beginning of the list
-  def add(e: T): SinglyLinkedList[T] = {
+  def add(e: T): LinkedList[T] = {
     val newHead = Node(e, head)
     head = newHead
     currentSize = currentSize + 1
@@ -27,8 +27,9 @@ class SinglyLinkedList[T] {
     removed
   }
 
+  // O(n)
   def remove(i: Int): T = {
-    if (i > size || head == null) {
+    if (i >= size || head == null) {
       throw new IndexOutOfBoundsException(s"Can not remove $i element from list with size $size")
     } else if (i == 0) {
       removeFirst()
@@ -48,11 +49,15 @@ class SinglyLinkedList[T] {
 
   // O(n)
   def get(i: Int): T = {
-    var e: Node[T] = head
-    for (_ <- 0 until i) {
-      e = e.next
+    if (i >= size) {
+      throw new IndexOutOfBoundsException(s"Can not get $i element from list with size $size")
+    } else {
+      var e: Node[T] = head
+      for (_ <- 0 until i) {
+        e = e.next
+      }
+      e.value
     }
-    e.value
   }
 
   // O(1)
@@ -61,11 +66,26 @@ class SinglyLinkedList[T] {
   }
 
   // O(n)
+  // also uses O(n) space
+  def reverse(): LinkedList[T] = {
+    val reversedList = LinkedList[T]()
+    var p = head
+    for (_ <- 0 until size - 1) {
+      reversedList.add(p.value)
+      p = p.next
+    }
+
+    head = reversedList.head
+
+    this
+  }
+
+  // O(n)
   override def equals(other: Any): Boolean = {
     other match {
-      case otherList: SinglyLinkedList[T] if this.currentSize == otherList.currentSize =>
+      case otherList: LinkedList[T] if this.size == otherList.size =>
         var isEqual = true
-        for (i <- 0 until currentSize) {
+        for (i <- 0 until size) {
           isEqual = isEqual && get(i) == otherList.get(i)
         }
         isEqual
@@ -76,21 +96,21 @@ class SinglyLinkedList[T] {
   // O(n)
   override def hashCode: Int = {
     var hashCode = 0
-    for (i <- 0 until currentSize) {
+    for (i <- 0 until size) {
       hashCode = hashCode * 31 + get(i).hashCode()
     }
     hashCode
   }
 }
 
-object SinglyLinkedList {
-  def apply[T](xs: T*): SinglyLinkedList[T] = {
-    val list = new SinglyLinkedList[T]
+object LinkedList {
+  def apply[T](xs: T*): LinkedList[T] = {
+    val list = new LinkedList[T]
     xs.reverse.foreach(list.add)
     list
   }
 
-  def from[T](xs: Seq[T]): SinglyLinkedList[T] = {
+  def from[T](xs: Seq[T]): LinkedList[T] = {
     apply(xs: _*)
   }
 
