@@ -1,6 +1,6 @@
-package com.learning.datastructures.linkedlist
+package com.learning.datastructures.mutable.linkedlist
 
-import com.learning.datastructures.linkedlist.LinkedList.Node
+import LinkedList.Node
 
 class LinkedList[T] {
   private var currentSize: Int = 0

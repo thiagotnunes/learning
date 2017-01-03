@@ -1,4 +1,4 @@
-package com.learning.datastructures.linkedlist
+package com.learning.datastructures.mutable.linkedlist
 
 import com.learning.PropertySpecification
 import org.scalacheck.{Arbitrary, Gen, Prop}

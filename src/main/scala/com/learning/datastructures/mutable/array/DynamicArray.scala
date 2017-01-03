@@ -1,4 +1,4 @@
-package com.learning.datastructures.array
+package com.learning.datastructures.mutable.array
 
 import scala.reflect.ClassTag
 
