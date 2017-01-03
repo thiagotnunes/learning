@@ -21,6 +21,7 @@ class DynamicArraySpec extends PropertySpecification {
   "add" >> {
     "adds the element to the array" in {
       val array = new DynamicArray[Int](1)
+
       array.add(1)
 
       array.size ==== 1
@@ -30,6 +31,7 @@ class DynamicArraySpec extends PropertySpecification {
 
     "expands the array when capacity has been reached" in {
       val array = new DynamicArray[Int](1)
+
       array.add(1)
       array.add(2)
 
@@ -41,6 +43,7 @@ class DynamicArraySpec extends PropertySpecification {
   "removeLast" >> {
     "removes an element from the array" in {
       val array = new DynamicArray[Int](2)
+
       array.add(1)
       array.add(2)
 
@@ -59,6 +62,7 @@ class DynamicArraySpec extends PropertySpecification {
   "remove" >> {
     "removes an element from the array at the given index" in {
       val array = new DynamicArray[Int](3)
+
       array.add(1)
       array.add(2)
       array.add(3)
@@ -71,6 +75,7 @@ class DynamicArraySpec extends PropertySpecification {
   "get" >> {
     "returns the element in the given position" in {
       val array = new DynamicArray[Int](3)
+
       array.add(5)
       array.add(4)
       array.add(3)
@@ -81,6 +86,7 @@ class DynamicArraySpec extends PropertySpecification {
 
     "throws array index out of bounds when position is not in array" in {
       val array = new DynamicArray[Int](3)
+
       array.add(5)
 
       array.get(1) must throwA[ArrayIndexOutOfBoundsException]
@@ -89,12 +95,21 @@ class DynamicArraySpec extends PropertySpecification {
 
   "reverse" >> {
     "returns the reversed array" in {
-      DynamicArray(1, 2, 3, 4, 5).reverse() ==== DynamicArray(5, 4, 3, 2, 1)
+      val array = DynamicArray(1, 2, 3, 4, 5)
+
+      array.reverse()
+
+      array ==== DynamicArray(5, 4, 3, 2, 1)
     }
 
     "double reversing returns the original array" in {
-      forAll { (xs: DynamicArray[Int]) =>
-        DynamicArray(xs).reverse().reverse() ==== DynamicArray(xs)
+      forAll { (xs: Seq[Int]) =>
+        val array = DynamicArray.from(xs)
+
+        array.reverse()
+        array.reverse()
+
+        array ==== DynamicArray.from(xs)
       }
     }
   }

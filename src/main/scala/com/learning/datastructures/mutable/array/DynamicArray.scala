@@ -1,14 +1,16 @@
 package com.learning.datastructures.mutable.array
 
+import com.learning.datastructures.mutable.MyCollection
+
 import scala.reflect.ClassTag
 
-class DynamicArray[T: ClassTag](initialCapacity: Int) {
+class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
   private var currentCapacity = initialCapacity
   private var array = Array.ofDim[T](currentCapacity)
   private var index = 0
 
   // O(1) on average
-  def add(e: T): DynamicArray[T] = {
+  def add(e: T): Unit = {
     if (index == currentCapacity) {
       currentCapacity = currentCapacity * 2
       val newArray = Array.ofDim[T](currentCapacity)
@@ -17,8 +19,6 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) {
     }
     array(index) = e
     index = index + 1
-
-    this
   }
 
   // O(1)
@@ -61,14 +61,12 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) {
   }
 
   // O(n)
-  def reverse(): DynamicArray[T] = {
+  def reverse(): Unit = {
     for (i <- 0 until (size / 2)) {
       val tmp = array(i)
       array(i) = array(size - 1 - i)
       array(size - 1 - i) = tmp
     }
-
-    this
   }
 
   // O(n)

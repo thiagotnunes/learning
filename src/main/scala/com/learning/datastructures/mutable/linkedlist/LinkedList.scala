@@ -1,17 +1,17 @@
 package com.learning.datastructures.mutable.linkedlist
 
 import LinkedList.Node
+import com.learning.datastructures.mutable.MyCollection
 
-class LinkedList[T] {
+class LinkedList[T] extends MyCollection[T] {
   private var currentSize: Int = 0
   private var head: Node[T] = _
 
   // O(1) for insertions in the beginning of the list
-  def add(e: T): LinkedList[T] = {
+  def add(e: T): Unit = {
     val newHead = Node(e, head)
     head = newHead
     currentSize = currentSize + 1
-    this
   }
 
   // O(1)
@@ -66,10 +66,8 @@ class LinkedList[T] {
   }
 
   // O(n)
-  def reverse(): LinkedList[T] = {
-    if (size == 0) {
-      this
-    } else {
+  def reverse(): Unit = {
+    if (size != 0) {
       var previous: Node[T] = null
       var current: Node[T] = head
       var next: Node[T] = null
@@ -81,9 +79,8 @@ class LinkedList[T] {
         previous = current
         current = next
       } while (current != null)
-      head = previous
 
-      this
+      head = previous
     }
   }
 

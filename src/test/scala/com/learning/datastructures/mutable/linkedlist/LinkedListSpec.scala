@@ -19,6 +19,7 @@ class LinkedListSpec extends PropertySpecification {
   "add" >> {
     "adds an element to the list" in {
       val list = LinkedList[Int]()
+
       list.add(1)
 
       list.size ==== 1
@@ -44,6 +45,7 @@ class LinkedListSpec extends PropertySpecification {
     "removes the first element from the list" in {
       forAll(nonEmptyListOf(arbitrary[Int])) { (xs: List[Int]) =>
         val list = LinkedList.from(xs)
+
         val removed = list.removeFirst()
 
         removed ==== xs.head
@@ -68,6 +70,7 @@ class LinkedListSpec extends PropertySpecification {
 
       forAll(nonEmptyListAndRandomIndex)({ case (xs, i) =>
         val list = LinkedList.from(xs)
+
         val removed = list.remove(i)
 
         removed ==== xs(i)
@@ -110,12 +113,21 @@ class LinkedListSpec extends PropertySpecification {
 
   "reverse" >> {
     "returns the reversed list" in {
-      LinkedList(1, 2, 3).reverse() ==== LinkedList(3, 2, 1)
+      val list = LinkedList(1, 2, 3)
+
+      list.reverse()
+
+      list ==== LinkedList(3, 2, 1)
     }
 
     "double reversing returns the original list" in {
       forAll { (xs: Seq[Int]) =>
-        LinkedList.from(xs).reverse().reverse() ==== LinkedList.from(xs)
+        val list = LinkedList.from(xs)
+
+        list.reverse()
+        list.reverse()
+
+        list ==== LinkedList.from(xs)
       }
     }
   }
