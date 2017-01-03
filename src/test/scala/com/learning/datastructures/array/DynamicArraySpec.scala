@@ -24,7 +24,7 @@ class DynamicArraySpec extends PropertySpecification {
       array.add(1)
 
       array.size ==== 1
-      array.currentCapacity ==== 1
+      array.capacity ==== 1
       array ==== DynamicArray(1)
     }
 
@@ -33,7 +33,7 @@ class DynamicArraySpec extends PropertySpecification {
       array.add(1)
       array.add(2)
 
-      array.currentCapacity ==== 2
+      array.capacity ==== 2
       array ==== DynamicArray(1, 2)
     }
   }

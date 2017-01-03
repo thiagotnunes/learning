@@ -3,15 +3,15 @@ package com.learning.datastructures.array
 import scala.reflect.ClassTag
 
 class DynamicArray[T: ClassTag](initialCapacity: Int) {
-  private var capacity = initialCapacity
-  private var array = Array.ofDim[T](capacity)
+  private var currentCapacity = initialCapacity
+  private var array = Array.ofDim[T](currentCapacity)
   private var index = 0
 
   // O(1) on average
   def add(e: T): DynamicArray[T] = {
-    if (index == capacity) {
-      capacity = capacity * 2
-      val newArray = Array.ofDim[T](capacity)
+    if (index == currentCapacity) {
+      currentCapacity = currentCapacity * 2
+      val newArray = Array.ofDim[T](currentCapacity)
       Array.copy(array, 0, newArray, 0, size)
       array = newArray
     }
@@ -56,8 +56,8 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) {
     index
   }
 
-  def currentCapacity: Int = {
-    capacity
+  def capacity: Int = {
+    currentCapacity
   }
 
   // O(n)
