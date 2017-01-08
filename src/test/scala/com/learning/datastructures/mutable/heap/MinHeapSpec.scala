@@ -9,49 +9,49 @@ class MinHeapSpec extends PropertySpecification {
 
   "heap creation" >> {
     "does nothing when array is already a min heap" in {
-      new MinHeap(DynamicArray(1, 2, 3, 4, 5, 6, 7)).asArray ==== DynamicArray(1, 2, 3, 4, 5, 6, 7)
+      Heap.minHeap(DynamicArray(1, 2, 3, 4, 5, 6, 7)).asArray ==== DynamicArray(1, 2, 3, 4, 5, 6, 7)
     }
 
     "rearranges array when the input given is not a min heap" in {
-      new MinHeap(DynamicArray(7, 6, 5, 4, 3, 2, 1)).asArray ==== DynamicArray(1, 3, 2, 4, 6, 7, 5)
+      Heap.minHeap(DynamicArray(7, 6, 5, 4, 3, 2, 1)).asArray ==== DynamicArray(1, 3, 2, 4, 6, 7, 5)
     }
   }
 
   "min" >> {
     "returns the min element" in {
       forAll(Gen.nonEmptyListOf(Arbitrary.arbitrary[Int])) { (xs: Seq[Int]) =>
-        new MinHeap[Int](DynamicArray.from(xs)).min ==== Option(xs.min)
+        Heap.minHeap(DynamicArray.from(xs)).peek ==== Option(xs.min)
       }
     }
 
     "returns None when heap is empty" in {
-      new MinHeap[Int](DynamicArray[Int]()).min ==== None
+      Heap.minHeap(DynamicArray()).peek ==== None
     }
   }
 
   "extract min" >> {
     "returns the minimum element" in {
       forAll(Gen.nonEmptyListOf(Arbitrary.arbitrary[Int])) { (xs: Seq[Int]) =>
-        new MinHeap[Int](DynamicArray.from(xs)).extractMin ==== Option(xs.min)
+        Heap.minHeap(DynamicArray.from(xs)).extract ==== Option(xs.min)
       }
 
       "rearranges array to be a min heap" in {
-        val heap = new MinHeap(DynamicArray(7, 6, 5, 4, 3, 2, 1))
+        val heap = Heap.minHeap(DynamicArray(7, 6, 5, 4, 3, 2, 1))
 
-        heap.extractMin
+        heap.extract
 
         heap.asArray ==== DynamicArray(2, 3, 5, 4, 6, 7)
       }
     }
 
     "returns None when the heap is empty" in {
-      new MinHeap(DynamicArray[Int]()).extractMin ==== None
+      Heap.minHeap(DynamicArray()).extract ==== None
     }
   }
 
   "add" >> {
     "maintains min heap invariant" in {
-      val heap = new MinHeap[Int](DynamicArray.empty[Int])
+      val heap = Heap.minHeap(DynamicArray.empty[Int])
 
       heap.add(70)
       heap.asArray ==== DynamicArray(70)
