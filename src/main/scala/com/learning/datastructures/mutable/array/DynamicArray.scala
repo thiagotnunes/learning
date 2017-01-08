@@ -22,32 +22,34 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
   }
 
   // O(1)
-  def removeLast(): T = {
+  def removeLast(): Option[T] = {
     if (index == 0) {
-      throw new ArrayIndexOutOfBoundsException(0)
+      None
+    } else {
+      remove(index - 1)
     }
-    remove(index - 1)
   }
 
   // O(n)
-  override def remove(i: Int): T = {
+  override def remove(i: Int): Option[T] = {
     if (index < i) {
-      throw new ArrayIndexOutOfBoundsException(i)
+      None
+    } else {
+      val element = array(i)
+      for (j <- i until index - 1) {
+        array(j) = array(j + 1)
+      }
+      index = index - 1
+      Some(element)
     }
-    val element = array(i)
-    for (j <- i until index - 1) {
-      array(j) = array(j + 1)
-    }
-    index = index - 1
-    element
   }
 
   // O(1)
-  override def get(i: Int): T = {
+  override def get(i: Int): Option[T] = {
     if (i < index) {
-      array(i)
+      Some(array(i))
     } else {
-      throw new ArrayIndexOutOfBoundsException(i)
+      None
     }
   }
 
@@ -86,8 +88,8 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
   // O(1)
   def swap(i: Int, j: Int): Unit = {
     if (i < size && j < size) {
-      val tmp = get(i)
-      set(i, get(j))
+      val tmp = get(i).get
+      set(i, get(j).get)
       set(j, tmp)
     } else if (i >= size) {
       throw new ArrayIndexOutOfBoundsException(i)

@@ -20,19 +20,19 @@ class MinHeapSpec extends PropertySpecification {
   "min" >> {
     "returns the min element" in {
       forAll(Gen.nonEmptyListOf(Arbitrary.arbitrary[Int])) { (xs: Seq[Int]) =>
-        new MinHeap(DynamicArray.from(xs)).min ==== xs.min
+        new MinHeap[Int](DynamicArray.from(xs)).min ==== Option(xs.min)
       }
     }
 
-    "returns null when heap is empty" in {
-      new MinHeap(DynamicArray[Int]()).min ==== null.asInstanceOf[Int]
+    "returns None when heap is empty" in {
+      new MinHeap[Int](DynamicArray[Int]()).min ==== None
     }
   }
 
   "extract min" >> {
     "returns the minimum element" in {
       forAll(Gen.nonEmptyListOf(Arbitrary.arbitrary[Int])) { (xs: Seq[Int]) =>
-        new MinHeap(DynamicArray.from(xs)).extractMin ==== xs.min
+        new MinHeap[Int](DynamicArray.from(xs)).extractMin ==== Option(xs.min)
       }
 
       "rearranges array to be a min heap" in {
@@ -44,8 +44,8 @@ class MinHeapSpec extends PropertySpecification {
       }
     }
 
-    "returns null when the heap is empty" in {
-      new MinHeap(DynamicArray[Int]()).extractMin ==== null.asInstanceOf[Int]
+    "returns None when the heap is empty" in {
+      new MinHeap(DynamicArray[Int]()).extractMin ==== None
     }
   }
 

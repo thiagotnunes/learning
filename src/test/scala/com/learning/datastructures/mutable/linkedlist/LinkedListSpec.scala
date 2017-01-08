@@ -48,14 +48,14 @@ class LinkedListSpec extends PropertySpecification {
 
         val removed = list.removeFirst()
 
-        removed ==== xs.head
+        removed ==== Some(xs.head)
         list.size ==== xs.size - 1
         list ==== LinkedList.from(xs.tail)
       }
     }
 
-    "throws an exception when the list is empty" in {
-      LinkedList[Int]().removeFirst() must throwA[IndexOutOfBoundsException]
+    "returns None when the list is empty" in {
+      LinkedList[Int]().removeFirst() ==== None
     }
   }
 
@@ -73,18 +73,18 @@ class LinkedListSpec extends PropertySpecification {
 
         val removed = list.remove(i)
 
-        removed ==== xs(i)
+        removed ==== Some(xs(i))
         list.size ==== xs.size - 1
         list ==== LinkedList.from(xs.take(i) ++ xs.drop(i + 1))
       })
     }
 
-    "throws an exception when the list is empty" in {
-      LinkedList[Int]().remove(0) must throwA[IndexOutOfBoundsException]
+    "returns None when the list is empty" in {
+      LinkedList[Int]().remove(0) ==== None
     }
 
-    "throws an exception when trying to remove non-existing index" in {
-      LinkedList(1, 2, 3).remove(3) must throwA[IndexOutOfBoundsException]
+    "returns None when trying to remove non-existing index" in {
+      LinkedList(1, 2, 3).remove(3) ==== None
     }
   }
 
@@ -98,16 +98,16 @@ class LinkedListSpec extends PropertySpecification {
       }
 
       forAll(nonEmptyListAndRandomIndex)({ case (xs, i) =>
-        LinkedList.from(xs).get(i) ==== xs(i)
+        LinkedList.from(xs).get(i) ==== Option(xs(i))
       })
     }
 
-    "throws an exception when trying to get non-existing index" in {
-      LinkedList(1, 2, 3).get(3) must throwA[IndexOutOfBoundsException]
+    "returns None when trying to get non-existing index" in {
+      LinkedList(1, 2, 3).get(3) ==== None
     }
 
-    "throws an exception when trying to get from empty list" in {
-      LinkedList[Int]().get(0) must throwA[IndexOutOfBoundsException]
+    "returns None when trying to get from empty list" in {
+      LinkedList[Int]().get(0) ==== None
     }
   }
 

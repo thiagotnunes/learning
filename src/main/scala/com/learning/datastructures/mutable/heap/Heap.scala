@@ -3,7 +3,6 @@ package com.learning.datastructures.mutable.heap
 import com.learning.datastructures.mutable.array.DynamicArray
 
 import scala.reflect.ClassTag
-import scala.util.Try
 
 abstract class Heap[T: ClassTag](private val heap: DynamicArray[T], choose: (T, T) => T) {
   heapify(heap)
@@ -13,10 +12,10 @@ abstract class Heap[T: ClassTag](private val heap: DynamicArray[T], choose: (T, 
     heap.add(e)
     val i = size - 1
 
-    def bottomUpHeapify(i: Int, e: T): Unit = {
+    def bottomUpHeapify(i: Int, e: Option[T]): Unit = {
       if (i > 0) {
         val parentIndex = (Math.ceil(i / 2.0) - 1).toInt
-        val shouldSwap = nullSafeMinOrMax(e, heap.get(parentIndex)) == e
+        val shouldSwap = safeMinOrMax(e, heap.get(parentIndex)) == e
         if (shouldSwap) {
           heap.swap(i, parentIndex)
           bottomUpHeapify(parentIndex, heap.get(parentIndex))
@@ -24,7 +23,7 @@ abstract class Heap[T: ClassTag](private val heap: DynamicArray[T], choose: (T, 
       }
     }
 
-    bottomUpHeapify(i, e)
+    bottomUpHeapify(i, Some(e))
   }
 
   // O(1)
@@ -33,12 +32,12 @@ abstract class Heap[T: ClassTag](private val heap: DynamicArray[T], choose: (T, 
   }
 
   // O(1)
-  protected def peek: T = {
-    Try(heap.get(0)).getOrElse(null.asInstanceOf[T])
+  protected def peek: Option[T] = {
+    heap.get(0)
   }
 
   // O(logn)
-  protected def extract: T = {
+  protected def extract: Option[T] = {
     if (size > 0) {
       val e = heap.get(0)
       heap.swap(0, heap.size - 1)
@@ -47,7 +46,7 @@ abstract class Heap[T: ClassTag](private val heap: DynamicArray[T], choose: (T, 
 
       e
     } else {
-      null.asInstanceOf[T]
+      None
     }
   }
 
@@ -63,14 +62,14 @@ abstract class Heap[T: ClassTag](private val heap: DynamicArray[T], choose: (T, 
     val e = array.get(i)
     val leftIndex = 2 * i + 1
     val rightIndex = 2 * i + 2
-    val left = Try(array.get(leftIndex)).getOrElse(null.asInstanceOf[T])
-    val right = Try(array.get(rightIndex)).getOrElse(null.asInstanceOf[T])
-    val minOrMax = nullSafeMinOrMax(nullSafeMinOrMax(e, left), right)
+    val left = array.get(leftIndex)
+    val right = array.get(rightIndex)
+    val choice = safeMinOrMax(safeMinOrMax(e, left), right)
 
-    if (left == minOrMax) {
+    if (left == choice) {
       array.swap(i, leftIndex)
       heapify(leftIndex, array)
-    } else if (right == minOrMax) {
+    } else if (right == choice) {
       array.swap(i, rightIndex)
       heapify(rightIndex, array)
     } else {
@@ -82,13 +81,12 @@ abstract class Heap[T: ClassTag](private val heap: DynamicArray[T], choose: (T, 
   val asArray: DynamicArray[T] = heap
 
   // O(1)
-  private def nullSafeMinOrMax(e1: T, e2: T): T = {
-    if (e2 == null) {
-      e1
-    } else if (e1 == null) {
-      e2
-    } else {
-      choose(e1, e2)
+  private def safeMinOrMax(e1: Option[T], e2: Option[T]): Option[T] = {
+    (e1, e2) match {
+      case (Some(e1), Some(e2)) => Some(choose(e1, e2))
+      case (Some(e1), None) => Some(e1)
+      case (None, Some(e2)) => Some(e2)
+      case (None, None) => None
     }
   }
 
@@ -110,10 +108,10 @@ abstract class Heap[T: ClassTag](private val heap: DynamicArray[T], choose: (T, 
     builder.append("Heap(")
     if (!heap.isEmpty) {
       for (i <- 0 until size - 1) {
-        builder.append(heap.get(i))
+        builder.append(heap.get(i).get)
         builder.append(",")
       }
-      builder.append(heap.get(size - 1))
+      builder.append(heap.get(size - 1).get)
     }
     builder.append(")")
 
@@ -122,11 +120,13 @@ abstract class Heap[T: ClassTag](private val heap: DynamicArray[T], choose: (T, 
 }
 
 class MinHeap[T: ClassTag](heap: DynamicArray[T])(implicit ev: Ordering[T]) extends Heap[T](heap, ev.min) {
-  def min: T = peek
-  def extractMin: T = extract
+  def min: Option[T] = peek
+
+  def extractMin: Option[T] = extract
 }
 
 class MaxHeap[T: ClassTag](heap: DynamicArray[T])(implicit ev: Ordering[T]) extends Heap[T](heap, ev.max) {
-  def max: T = peek
-  def extractMax: T = extract
+  def max: Option[T] = peek
+
+  def extractMax: Option[T] = extract
 }

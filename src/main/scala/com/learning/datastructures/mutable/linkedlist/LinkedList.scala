@@ -15,22 +15,22 @@ class LinkedList[T] extends MyCollection[T] {
   }
 
   // O(1)
-  def removeFirst(): T = {
+  def removeFirst(): Option[T] = {
     if (head == null) {
-      throw new IndexOutOfBoundsException("Can not remove from an empty list")
+      None
+    } else {
+      val removed = head.value
+      head = head.next
+      currentSize = currentSize - 1
+
+      Some(removed)
     }
-
-    val removed = head.value
-    head = head.next
-    currentSize = currentSize - 1
-
-    removed
   }
 
   // O(n)
-  def remove(i: Int): T = {
+  def remove(i: Int): Option[T] = {
     if (i >= size || head == null) {
-      throw new IndexOutOfBoundsException(s"Can not remove $i element from list with size $size")
+      None
     } else if (i == 0) {
       removeFirst()
     } else {
@@ -43,20 +43,20 @@ class LinkedList[T] extends MyCollection[T] {
       p.next = p.next.next
       currentSize = currentSize - 1
 
-      toBeRemoved
+      Some(toBeRemoved)
     }
   }
 
   // O(n)
-  def get(i: Int): T = {
+  def get(i: Int): Option[T] = {
     if (i >= size) {
-      throw new IndexOutOfBoundsException(s"Can not get $i element from list with size $size")
+      None
     } else {
       var e: Node[T] = head
       for (_ <- 0 until i) {
         e = e.next
       }
-      e.value
+      Some(e.value)
     }
   }
 

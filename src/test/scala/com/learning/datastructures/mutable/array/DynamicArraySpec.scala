@@ -57,15 +57,15 @@ class DynamicArraySpec extends PropertySpecification {
       array.add(1)
       array.add(2)
 
-      array.removeLast() ==== 2
+      array.removeLast() ==== Some(2)
       array.size ==== 1
       array ==== DynamicArray(1)
     }
 
-    "throws exception when removing from an empty array" in {
+    "returns None when removing from an empty array" in {
       val array = new DynamicArray[Int](1)
 
-      array.removeLast() must throwA[ArrayIndexOutOfBoundsException]
+      array.removeLast() ==== None
     }
   }
 
@@ -77,7 +77,7 @@ class DynamicArraySpec extends PropertySpecification {
       array.add(2)
       array.add(3)
 
-      array.remove(1) ==== 2
+      array.remove(1) ==== Some(2)
       array ==== DynamicArray(1, 3)
     }
   }
@@ -90,16 +90,16 @@ class DynamicArraySpec extends PropertySpecification {
       array.add(4)
       array.add(3)
 
-      array.get(1) ==== 4
+      array.get(1) ==== Some(4)
       array ==== DynamicArray(5, 4, 3)
     }
 
-    "throws array index out of bounds when position is not in array" in {
+    "returns none when position is not in array" in {
       val array = new DynamicArray[Int](3)
 
       array.add(5)
 
-      array.get(1) must throwA[ArrayIndexOutOfBoundsException]
+      array.get(1) ==== None
     }
   }
 

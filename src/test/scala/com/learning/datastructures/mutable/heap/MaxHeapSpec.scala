@@ -20,19 +20,19 @@ class MaxHeapSpec extends PropertySpecification {
   "max" >> {
     "returns the max element" in {
       forAll(Gen.nonEmptyListOf(Arbitrary.arbitrary[Int])) { (xs: Seq[Int]) =>
-        new MaxHeap(DynamicArray.from(xs)).max ==== xs.max
+        new MaxHeap[Int](DynamicArray.from(xs)).max ==== Option(xs.max)
       }
     }
 
-    "returns null when heap is empty" in {
-      new MaxHeap(DynamicArray[Int]()).max ==== null.asInstanceOf[Int]
+    "returns None when heap is empty" in {
+      new MaxHeap(DynamicArray[Int]()).max ==== None
     }
   }
 
   "extract max" >> {
     "returns the maximum element" in {
       forAll(Gen.nonEmptyListOf(Arbitrary.arbitrary[Int])) { (xs: Seq[Int]) =>
-        new MaxHeap(DynamicArray.from(xs)).extractMax ==== xs.max
+        new MaxHeap(DynamicArray.from(xs)).extractMax ==== Option(xs.max)
       }
 
       "rearranges array to be a max heap" in {
@@ -44,8 +44,8 @@ class MaxHeapSpec extends PropertySpecification {
       }
     }
 
-    "returns null when the heap is empty" in {
-      new MaxHeap(DynamicArray[Int]()).extractMax ==== null.asInstanceOf[Int]
+    "returns None when the heap is empty" in {
+      new MaxHeap[Int](DynamicArray[Int]()).extractMax ==== None
     }
   }
 
