@@ -5,12 +5,12 @@ import com.learning.datastructures.mutable.MyCollection
 import scala.reflect.ClassTag
 
 class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
-  private var currentCapacity = initialCapacity
+  private var currentCapacity = if (initialCapacity > 0) initialCapacity else DynamicArray.InitialCapacity
   private var array = Array.ofDim[T](currentCapacity)
   private var index = 0
 
   // O(1) on average
-  def add(e: T): Unit = {
+  override def add(e: T): Unit = {
     if (index == currentCapacity) {
       currentCapacity = currentCapacity * 2
       val newArray = Array.ofDim[T](currentCapacity)
@@ -30,7 +30,7 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
   }
 
   // O(n)
-  def remove(i: Int): T = {
+  override def remove(i: Int): T = {
     if (index < i) {
       throw new ArrayIndexOutOfBoundsException(i)
     }
@@ -43,7 +43,7 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
   }
 
   // O(1)
-  def get(i: Int): T = {
+  override def get(i: Int): T = {
     if (i < index) {
       array(i)
     } else {
@@ -52,7 +52,16 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
   }
 
   // O(1)
-  def size: Int = {
+  def set(i: Int, t: T): Unit = {
+    if (i < index) {
+      array(i) = t
+    } else {
+      throw new ArrayIndexOutOfBoundsException(i)
+    }
+  }
+
+  // O(1)
+  override def size: Int = {
     index
   }
 
@@ -61,7 +70,7 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
   }
 
   // O(n)
-  def reverse(): Unit = {
+  override def reverse(): Unit = {
     for (i <- 0 until (size / 2)) {
       val tmp = array(i)
       array(i) = array(size - 1 - i)
@@ -69,9 +78,27 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
     }
   }
 
+  // O(1)
+  override def isEmpty: Boolean = {
+    size == 0
+  }
+
+  // O(1)
+  def swap(i: Int, j: Int): Unit = {
+    if (i < size && j < size) {
+      val tmp = get(i)
+      set(i, get(j))
+      set(j, tmp)
+    } else if (i >= size) {
+      throw new ArrayIndexOutOfBoundsException(i)
+    } else {
+      throw new ArrayIndexOutOfBoundsException(j)
+    }
+  }
+
   // O(n)
   override def equals(other: Any): Boolean = other match {
-    case that: DynamicArray[T] => array.take(index).sameElements(that.array)
+    case that: DynamicArray[T] => array.take(index).sameElements(that.array.take(that.size))
     case _ => false
   }
 
@@ -90,6 +117,8 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
 }
 
 object DynamicArray {
+  val InitialCapacity: Int = 100
+
   def apply[T: ClassTag](vs: T*): DynamicArray[T] = {
     val array = new DynamicArray[T](vs.size)
     vs.foreach(array.add)
@@ -98,5 +127,9 @@ object DynamicArray {
 
   def from[T: ClassTag](vs: Seq[T]): DynamicArray[T] = {
     apply(vs: _*)
+  }
+
+  def empty[T: ClassTag]: DynamicArray[T] = {
+    new DynamicArray[T](InitialCapacity)
   }
 }

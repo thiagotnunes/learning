@@ -19,6 +19,16 @@ class DynamicArraySpec extends PropertySpecification {
   })
 
   "add" >> {
+    "sets initial capacity to default when 0 capacity is given" in {
+      val array = new DynamicArray[Int](0)
+
+      array.add(1)
+
+      array.size ==== 1
+      array.capacity ==== 100
+      array ==== DynamicArray(1)
+    }
+
     "adds the element to the array" in {
       val array = new DynamicArray[Int](1)
 
@@ -115,6 +125,10 @@ class DynamicArraySpec extends PropertySpecification {
   }
 
   "equals and hashCode" >> {
+    "two empty arrays must be equal" in {
+      DynamicArray.from(Seq.empty[Int]) ==== DynamicArray.from(Seq.empty[Int])
+    }
+
     "two arrays with the same elements must be equal" in {
       forAll { (xs: Seq[Int]) =>
         DynamicArray.from(xs) ==== DynamicArray.from(xs)
