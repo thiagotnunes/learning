@@ -65,6 +65,11 @@ class LinkedList[T] extends MyCollection[T] {
     currentSize
   }
 
+  // O(1)
+  def isEmpty: Boolean = {
+    size == 0
+  }
+
   // O(n)
   def reverse(): Unit = {
     if (size != 0) {
