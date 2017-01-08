@@ -13,18 +13,18 @@ abstract class Heap[T: ClassTag](private val heap: DynamicArray[T], choose: (T, 
     heap.add(e)
     val i = size - 1
 
-    def makeHeap(i: Int, e: T): Unit = {
+    def bottomUpHeapify(i: Int, e: T): Unit = {
       if (i > 0) {
         val parentIndex = (Math.ceil(i / 2.0) - 1).toInt
         val shouldSwap = nullSafeMinOrMax(e, heap.get(parentIndex)) == e
         if (shouldSwap) {
           heap.swap(i, parentIndex)
-          makeHeap(parentIndex, heap.get(parentIndex))
+          bottomUpHeapify(parentIndex, heap.get(parentIndex))
         }
       }
     }
 
-    makeHeap(i, e)
+    bottomUpHeapify(i, e)
   }
 
   // O(1)
@@ -127,8 +127,6 @@ class MinHeap[T: ClassTag](heap: DynamicArray[T])(implicit ev: Ordering[T]) exte
 }
 
 class MaxHeap[T: ClassTag](heap: DynamicArray[T])(implicit ev: Ordering[T]) extends Heap[T](heap, ev.max) {
-}
-
-object Heap {
-  val InitialCapacity = 10
+  def max: T = peek
+  def extractMax: T = extract
 }
