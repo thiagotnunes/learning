@@ -3,20 +3,22 @@ package com.learning.sorting.inplace
 import com.learning.PropertySpecification
 import org.scalacheck.Prop.forAll
 
+import scala.collection.mutable.ArrayBuffer
+
 class InsertionSorterSpec extends PropertySpecification {
   val sorter: Sorter = new InsertionSorter
 
   "sorts the array in ascending order" in {
-    forAll { (xs: Array[Int]) =>
+    forAll { (xs: ArrayBuffer[Int]) =>
       sorter.sort(xs)
       xs ==== xs.sorted
     }
   }
 
   "sorts the inverted order array" in {
-    val input = Array(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+    val input = ArrayBuffer(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
     sorter.sort(input)
 
-    input ==== Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    input ==== ArrayBuffer(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
   }
 }

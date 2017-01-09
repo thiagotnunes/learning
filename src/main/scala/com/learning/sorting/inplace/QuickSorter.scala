@@ -1,6 +1,8 @@
 package com.learning.sorting.inplace
 
-import scala.reflect.ClassTag
+import com.learning.Swapper
+
+import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 
 /**
@@ -13,11 +15,11 @@ import scala.util.Random
   * - Space complexity: O(1)
   */
 class QuickSorter extends Sorter {
-  override def sort[T: ClassTag : Ordering](xs: Array[T]): Unit = {
+  override def sort[T: Ordering](xs: ArrayBuffer[T]): Unit = {
     quickSort(xs, 0, xs.length - 1)
   }
 
-  private def quickSort[T : Ordering](xs: Array[T], lo: Int, hi: Int): Unit = {
+  private def quickSort[T: Ordering](xs: ArrayBuffer[T], lo: Int, hi: Int): Unit = {
     if (lo < hi) {
       val p = partition(xs, lo, hi)
       quickSort(xs, lo, p - 1)
@@ -25,19 +27,19 @@ class QuickSorter extends Sorter {
     }
   }
 
-  private def partition[T](xs: Array[T], lo: Int, hi: Int)(implicit ev: Ordering[T]): Int = {
+  private def partition[T](xs: ArrayBuffer[T], lo: Int, hi: Int)(implicit ev: Ordering[T]): Int = {
     val pivot = Random.nextInt(hi - lo) + lo
-    swap(xs, hi, pivot)
+    Swapper.swap(xs, hi, pivot)
 
     var i = lo
     for {k <- Range(lo, hi)} yield {
       if (ev.lt(xs(k), xs(hi))) {
-        swap(xs, k, i)
+        Swapper.swap(xs, k, i)
         i = i + 1
       }
     }
 
-    swap(xs, i, hi)
+    Swapper.swap(xs, i, hi)
     i
   }
 }
