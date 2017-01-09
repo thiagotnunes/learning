@@ -85,19 +85,6 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
     size == 0
   }
 
-  // O(1)
-  def swap(i: Int, j: Int): Unit = {
-    if (i < size && j < size) {
-      val tmp = get(i).get
-      set(i, get(j).get)
-      set(j, tmp)
-    } else if (i >= size) {
-      throw new ArrayIndexOutOfBoundsException(i)
-    } else {
-      throw new ArrayIndexOutOfBoundsException(j)
-    }
-  }
-
   // O(n)
   override def equals(other: Any): Boolean = other match {
     case that: DynamicArray[T] => array.take(index).sameElements(that.array.take(that.size))

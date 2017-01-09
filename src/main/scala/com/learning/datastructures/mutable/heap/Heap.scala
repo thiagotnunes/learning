@@ -1,16 +1,19 @@
 package com.learning.datastructures.mutable.heap
 
+import com.learning.Swapper
 import com.learning.datastructures.mutable.array.DynamicArray
 
+import scala.collection.mutable.ArrayBuffer
 import scala.reflect.ClassTag
+import scala.util.Try
 
 
-class Heap[T: ClassTag] private(array: DynamicArray[T], heapUtils: HeapUtils[T]) {
-  private val heap: DynamicArray[T] = array
+class Heap[T] private(array: ArrayBuffer[T], heapUtils: HeapUtils[T]) {
+  private val heap: ArrayBuffer[T] = array
 
   // O(logn)
   def add(e: T): Unit = {
-    heap.add(e)
+    heap(heap.length - 1) = e
     val i = size - 1
 
     heapUtils.siftUp(i, heap)
@@ -18,20 +21,20 @@ class Heap[T: ClassTag] private(array: DynamicArray[T], heapUtils: HeapUtils[T])
 
   // O(1)
   def size: Int = {
-    heap.size
+    heap.length
   }
 
   // O(1)
   def peek: Option[T] = {
-    heap.get(0)
+    Try(heap(0)).toOption
   }
 
   // O(logn)
   def extract: Option[T] = {
     if (size > 0) {
-      val e = heap.get(0)
-      heap.swap(0, heap.size - 1)
-      heap.removeLast()
+      val e = Try(heap(0)).toOption
+      Swapper.swap(heap, 0, heap.length - 1)
+      heap.remove(heap.length - 1)
       heapUtils.siftDown(0, heap)
 
       e
@@ -41,7 +44,7 @@ class Heap[T: ClassTag] private(array: DynamicArray[T], heapUtils: HeapUtils[T])
   }
 
   // O(1)
-  val asArray: DynamicArray[T] = heap
+  val asArray: ArrayBuffer[T] = heap
 
   // O(n)
   override def equals(other: Any): Boolean = other match {
@@ -59,12 +62,12 @@ class Heap[T: ClassTag] private(array: DynamicArray[T], heapUtils: HeapUtils[T])
     val builder = new StringBuilder
 
     builder.append("Heap(")
-    if (!heap.isEmpty) {
+    if (heap.nonEmpty) {
       for (i <- 0 until size - 1) {
-        builder.append(heap.get(i).get)
+        builder.append(heap(i))
         builder.append(",")
       }
-      builder.append(heap.get(size - 1).get)
+      builder.append(heap(size - 1))
     }
     builder.append(")")
 
@@ -73,12 +76,12 @@ class Heap[T: ClassTag] private(array: DynamicArray[T], heapUtils: HeapUtils[T])
 }
 
 object Heap {
-  def minHeap[T: ClassTag : Ordering](array: DynamicArray[T]): Heap[T] = {
+  def minHeap[T: Ordering](array: ArrayBuffer[T]): Heap[T] = {
     HeapUtils.minHeapUtils.heapify(array)
     new Heap[T](array, HeapUtils.minHeapUtils[T])
   }
 
-  def maxHeap[T: ClassTag : Ordering](array: DynamicArray[T]): Heap[T] = {
+  def maxHeap[T: Ordering](array: ArrayBuffer[T]): Heap[T] = {
     HeapUtils.maxHeapUtils.heapify(array)
     new Heap[T](array, HeapUtils.maxHeapUtils[T])
   }
