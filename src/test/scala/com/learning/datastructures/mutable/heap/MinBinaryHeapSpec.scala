@@ -6,38 +6,38 @@ import org.scalacheck.{Arbitrary, Gen}
 
 import scala.collection.mutable.ArrayBuffer
 
-class MinHeapSpec extends PropertySpecification {
+class MinBinaryHeapSpec extends PropertySpecification {
 
   "heap creation" >> {
     "does nothing when array is already a min heap" in {
-      Heap.minHeap(ArrayBuffer(1, 2, 3, 4, 5, 6, 7)).asArray ==== ArrayBuffer(1, 2, 3, 4, 5, 6, 7)
+      BinaryHeap.minHeap(ArrayBuffer(1, 2, 3, 4, 5, 6, 7)).asArray ==== ArrayBuffer(1, 2, 3, 4, 5, 6, 7)
     }
 
     "rearranges array when the input given is not a min heap" in {
-      Heap.minHeap(ArrayBuffer(7, 6, 5, 4, 3, 2, 1)).asArray ==== ArrayBuffer(1, 3, 2, 4, 6, 7, 5)
+      BinaryHeap.minHeap(ArrayBuffer(7, 6, 5, 4, 3, 2, 1)).asArray ==== ArrayBuffer(1, 3, 2, 4, 6, 7, 5)
     }
   }
 
   "min" >> {
     "returns the min element" in {
       forAll(Gen.nonEmptyListOf(Arbitrary.arbitrary[Int])) { (xs: Seq[Int]) =>
-        Heap.minHeap(ArrayBuffer(xs: _*)).peek ==== Option(xs.min)
+        BinaryHeap.minHeap(ArrayBuffer(xs: _*)).peek ==== Option(xs.min)
       }
     }
 
     "returns None when heap is empty" in {
-      Heap.minHeap(ArrayBuffer()).peek ==== None
+      BinaryHeap.minHeap(ArrayBuffer()).peek ==== None
     }
   }
 
   "extract min" >> {
     "returns the minimum element" in {
       forAll(Gen.nonEmptyListOf(Arbitrary.arbitrary[Int])) { (xs: Seq[Int]) =>
-        Heap.minHeap(ArrayBuffer(xs: _*)).extract ==== Option(xs.min)
+        BinaryHeap.minHeap(ArrayBuffer(xs: _*)).extract ==== Option(xs.min)
       }
 
       "rearranges array to be a min heap" in {
-        val heap = Heap.minHeap(ArrayBuffer(7, 6, 5, 4, 3, 2, 1))
+        val heap = BinaryHeap.minHeap(ArrayBuffer(7, 6, 5, 4, 3, 2, 1))
 
         heap.extract
 
@@ -46,13 +46,13 @@ class MinHeapSpec extends PropertySpecification {
     }
 
     "returns None when the heap is empty" in {
-      Heap.minHeap(ArrayBuffer()).extract ==== None
+      BinaryHeap.minHeap(ArrayBuffer()).extract ==== None
     }
   }
 
   "add" >> {
     "maintains min heap invariant" in {
-      val heap = Heap.minHeap(ArrayBuffer.empty[Int])
+      val heap = BinaryHeap.minHeap(ArrayBuffer.empty[Int])
 
       heap.add(70)
       heap.asArray ==== ArrayBuffer(30, 65, 60, 70)

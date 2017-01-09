@@ -6,38 +6,38 @@ import org.scalacheck.{Arbitrary, Gen}
 
 import scala.collection.mutable.ArrayBuffer
 
-class MaxHeapSpec extends PropertySpecification {
+class MaxBinaryHeapSpec extends PropertySpecification {
 
   "heap creation" >> {
     "does nothing when array is already a max heap" in {
-      Heap.maxHeap(ArrayBuffer(7, 6, 5, 4, 3, 2, 1)).asArray ==== ArrayBuffer(7, 6, 5, 4, 3, 2, 1)
+      BinaryHeap.maxHeap(ArrayBuffer(7, 6, 5, 4, 3, 2, 1)).asArray ==== ArrayBuffer(7, 6, 5, 4, 3, 2, 1)
     }
 
     "rearranges array when the input given is not a max heap" in {
-      Heap.maxHeap(ArrayBuffer(1, 2, 3, 4, 5, 6, 7)).asArray ==== ArrayBuffer(7, 5, 6, 4, 2, 1, 3)
+      BinaryHeap.maxHeap(ArrayBuffer(1, 2, 3, 4, 5, 6, 7)).asArray ==== ArrayBuffer(7, 5, 6, 4, 2, 1, 3)
     }
   }
 
   "max" >> {
     "returns the max element" in {
       forAll(Gen.nonEmptyListOf(Arbitrary.arbitrary[Int])) { (xs: Seq[Int]) =>
-        Heap.maxHeap(ArrayBuffer(xs: _*)).peek ==== Option(xs.max)
+        BinaryHeap.maxHeap(ArrayBuffer(xs: _*)).peek ==== Option(xs.max)
       }
     }
 
     "returns None when heap is empty" in {
-      Heap.maxHeap(ArrayBuffer()).peek ==== None
+      BinaryHeap.maxHeap(ArrayBuffer()).peek ==== None
     }
   }
 
   "extract max" >> {
     "returns the maximum element" in {
       forAll(Gen.nonEmptyListOf(Arbitrary.arbitrary[Int])) { (xs: Seq[Int]) =>
-        Heap.maxHeap(ArrayBuffer(xs: _*)).extract ==== Option(xs.max)
+        BinaryHeap.maxHeap(ArrayBuffer(xs: _*)).extract ==== Option(xs.max)
       }
 
       "rearranges array to be a max heap" in {
-        val heap = Heap.maxHeap(ArrayBuffer(1, 2, 3, 4, 5, 6, 7))
+        val heap = BinaryHeap.maxHeap(ArrayBuffer(1, 2, 3, 4, 5, 6, 7))
 
         heap.extract
 
@@ -46,13 +46,13 @@ class MaxHeapSpec extends PropertySpecification {
     }
 
     "returns None when the heap is empty" in {
-      Heap.maxHeap(ArrayBuffer[Int]()).extract ==== None
+      BinaryHeap.maxHeap(ArrayBuffer[Int]()).extract ==== None
     }
   }
 
   "add" >> {
     "maintains max heap invariant" in {
-      val heap = Heap.maxHeap(ArrayBuffer.empty[Int])
+      val heap = BinaryHeap.maxHeap(ArrayBuffer.empty[Int])
 
       heap.add(10)
       heap.asArray ==== ArrayBuffer(10)

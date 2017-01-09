@@ -6,7 +6,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.util.Try
 
 
-class Heap[T] private(array: ArrayBuffer[T], heapUtils: HeapUtils[T]) {
+class BinaryHeap[T] private(array: ArrayBuffer[T], heapUtils: HeapUtils[T]) {
   private val heap: ArrayBuffer[T] = array
 
   // O(logn)
@@ -46,7 +46,7 @@ class Heap[T] private(array: ArrayBuffer[T], heapUtils: HeapUtils[T]) {
 
   // O(n)
   override def equals(other: Any): Boolean = other match {
-    case that: Heap[T] => heap.equals(that.heap)
+    case that: BinaryHeap[T] => heap.equals(that.heap)
     case _ => false
   }
 
@@ -73,14 +73,14 @@ class Heap[T] private(array: ArrayBuffer[T], heapUtils: HeapUtils[T]) {
   }
 }
 
-object Heap {
-  def minHeap[T: Ordering](array: ArrayBuffer[T]): Heap[T] = {
+object BinaryHeap {
+  def minHeap[T: Ordering](array: ArrayBuffer[T]): BinaryHeap[T] = {
     HeapUtils.minHeapUtils.heapify(array)
-    new Heap[T](array, HeapUtils.minHeapUtils[T])
+    new BinaryHeap[T](array, HeapUtils.minHeapUtils[T])
   }
 
-  def maxHeap[T: Ordering](array: ArrayBuffer[T]): Heap[T] = {
+  def maxHeap[T: Ordering](array: ArrayBuffer[T]): BinaryHeap[T] = {
     HeapUtils.maxHeapUtils.heapify(array)
-    new Heap[T](array, HeapUtils.maxHeapUtils[T])
+    new BinaryHeap[T](array, HeapUtils.maxHeapUtils[T])
   }
 }
