@@ -1,5 +1,7 @@
 package com.learning.sorting.inplace
 
+import scala.reflect.ClassTag
+
 /**
   * - In place
   * - Stable
@@ -10,7 +12,7 @@ package com.learning.sorting.inplace
   * - Space complexity: O(1)
   */
 class BubbleSorter extends Sorter {
-  override def sort[T](xs: Array[T])(implicit o: Ordering[T]): Unit = optimizedSort[T](xs)
+  override def sort[T: ClassTag : Ordering](xs: Array[T]): Unit = optimizedSort[T](xs)
 
   private def optimizedSort[T](xs: Array[T])(implicit o: Ordering[T]): Unit = {
     var hasSwapped = false

@@ -1,5 +1,7 @@
 package com.learning.sorting.inplace
 
+import scala.reflect.ClassTag
+
 /**
   * - In place
   * - Stable
@@ -10,10 +12,10 @@ package com.learning.sorting.inplace
   * - Space complexity: O(1)
   */
 class InsertionSorter extends Sorter {
-  override def sort[T](xs: Array[T])(implicit o: Ordering[T]): Unit = {
+  override def sort[T: ClassTag](xs: Array[T])(implicit ev: Ordering[T]): Unit = {
     for {i <- Range(1, xs.length)} yield {
       var j = i
-      while (j > 0 && o.lt(xs(j), xs(j - 1))) {
+      while (j > 0 && ev.lt(xs(j), xs(j - 1))) {
         swap(xs, j, j - 1)
         j = j - 1
       }
