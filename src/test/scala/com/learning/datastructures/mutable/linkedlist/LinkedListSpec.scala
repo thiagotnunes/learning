@@ -1,10 +1,10 @@
 package com.learning.datastructures.mutable.linkedlist
 
 import com.learning.PropertySpecification
-import org.scalacheck.{Arbitrary, Gen, Prop}
 import org.scalacheck.Arbitrary.arbitrary
 import org.scalacheck.Gen.{choose, nonEmptyListOf}
 import org.scalacheck.Prop.forAll
+import org.scalacheck.{Arbitrary, Gen}
 
 class LinkedListSpec extends PropertySpecification {
 

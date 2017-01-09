@@ -1,7 +1,7 @@
 package com.learning.datastructures.mutable.linkedlist
 
-import LinkedList.Node
 import com.learning.datastructures.mutable.MyCollection
+import com.learning.datastructures.mutable.linkedlist.LinkedList.Node
 
 class LinkedList[T] extends MyCollection[T] {
   private var currentSize: Int = 0

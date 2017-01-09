@@ -1,10 +1,8 @@
 package com.learning.datastructures.mutable.heap
 
 import com.learning.Swapper
-import com.learning.datastructures.mutable.array.DynamicArray
 
 import scala.collection.mutable.ArrayBuffer
-import scala.reflect.ClassTag
 import scala.util.Try
 
 
