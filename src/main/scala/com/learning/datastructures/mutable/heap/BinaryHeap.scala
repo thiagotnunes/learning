@@ -6,7 +6,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.util.Try
 
 
-class BinaryHeap[T] private(array: ArrayBuffer[T], heapUtils: HeapUtils[T]) {
+class BinaryHeap[T] private(array: ArrayBuffer[T], heapUtils: BinaryHeapOps[T]) {
   private val heap: ArrayBuffer[T] = array
 
   // O(logn)
@@ -75,12 +75,12 @@ class BinaryHeap[T] private(array: ArrayBuffer[T], heapUtils: HeapUtils[T]) {
 
 object BinaryHeap {
   def minHeap[T: Ordering](array: ArrayBuffer[T]): BinaryHeap[T] = {
-    HeapUtils.minHeapUtils.heapify(array)
-    new BinaryHeap[T](array, HeapUtils.minHeapUtils[T])
+    BinaryHeapOps.minHeapUtils.heapify(array)
+    new BinaryHeap[T](array, BinaryHeapOps.minHeapUtils[T])
   }
 
   def maxHeap[T: Ordering](array: ArrayBuffer[T]): BinaryHeap[T] = {
-    HeapUtils.maxHeapUtils.heapify(array)
-    new BinaryHeap[T](array, HeapUtils.maxHeapUtils[T])
+    BinaryHeapOps.maxHeapUtils.heapify(array)
+    new BinaryHeap[T](array, BinaryHeapOps.maxHeapUtils[T])
   }
 }

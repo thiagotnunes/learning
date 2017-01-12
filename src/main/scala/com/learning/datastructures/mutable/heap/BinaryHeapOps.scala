@@ -4,7 +4,7 @@ import com.learning.Swapper
 
 import scala.collection.mutable.ArrayBuffer
 
-class HeapUtils[T] private(chooser: (T, T) => T) {
+class BinaryHeapOps[T] private(chooser: (T, T) => T) {
   // O(n) - looser bound is O(nlogn), but as you go down the tree there are less elements
   def heapify(array: ArrayBuffer[T]): Unit = {
     for (i <- (array.size / 2 - 1) to 0 by -1) {
@@ -64,8 +64,8 @@ class HeapUtils[T] private(chooser: (T, T) => T) {
   }
 }
 
-object HeapUtils {
-  def minHeapUtils[T](implicit ev: Ordering[T]) = new HeapUtils[T](ev.min)
+object BinaryHeapOps {
+  def minHeapUtils[T](implicit ev: Ordering[T]) = new BinaryHeapOps[T](ev.min)
 
-  def maxHeapUtils[T](implicit ev: Ordering[T]) = new HeapUtils[T](ev.max)
+  def maxHeapUtils[T](implicit ev: Ordering[T]) = new BinaryHeapOps[T](ev.max)
 }

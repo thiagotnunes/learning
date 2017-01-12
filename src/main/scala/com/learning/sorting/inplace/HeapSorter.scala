@@ -1,7 +1,7 @@
 package com.learning.sorting.inplace
 
 import com.learning.Swapper
-import com.learning.datastructures.mutable.heap.HeapUtils
+import com.learning.datastructures.mutable.heap.BinaryHeapOps
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -16,7 +16,7 @@ import scala.collection.mutable.ArrayBuffer
   */
 class HeapSorter extends Sorter {
   override def sort[T: Ordering](xs: ArrayBuffer[T]): Unit = {
-    val heapUtils = HeapUtils.maxHeapUtils
+    val heapUtils = BinaryHeapOps.maxHeapUtils
 
     heapUtils.heapify(xs)
 
