@@ -100,6 +100,7 @@ class BinarySearchTree[T](implicit ev: Ordering[T]) {
     max(root)
   }
 
+  // O(h)
   def min: Option[T] = {
     min(root)
   }
