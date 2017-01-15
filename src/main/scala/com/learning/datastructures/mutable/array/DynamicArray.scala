@@ -1,16 +1,14 @@
 package com.learning.datastructures.mutable.array
 
-import com.learning.datastructures.mutable.MyCollection
-
 import scala.reflect.ClassTag
 
-class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
+class DynamicArray[T: ClassTag](initialCapacity: Int) {
   private var currentCapacity = if (initialCapacity > 0) initialCapacity else DynamicArray.InitialCapacity
   private var array = Array.ofDim[T](currentCapacity)
   private var index = 0
 
   // O(1) on average
-  override def add(e: T): Unit = {
+  def add(e: T): Unit = {
     if (index == currentCapacity) {
       currentCapacity = currentCapacity * 2
       val newArray = Array.ofDim[T](currentCapacity)
@@ -31,7 +29,7 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
   }
 
   // O(n)
-  override def remove(i: Int): Option[T] = {
+  def remove(i: Int): Option[T] = {
     if (index < i) {
       None
     } else {
@@ -45,7 +43,7 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
   }
 
   // O(1)
-  override def get(i: Int): Option[T] = {
+  def get(i: Int): Option[T] = {
     if (i < index) {
       Some(array(i))
     } else {
@@ -63,7 +61,7 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
   }
 
   // O(1)
-  override def size: Int = {
+  def size: Int = {
     index
   }
 
@@ -72,7 +70,7 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
   }
 
   // O(n)
-  override def reverse(): Unit = {
+  def reverse(): Unit = {
     for (i <- 0 until (size / 2)) {
       val tmp = array(i)
       array(i) = array(size - 1 - i)
@@ -81,7 +79,7 @@ class DynamicArray[T: ClassTag](initialCapacity: Int) extends MyCollection[T] {
   }
 
   // O(1)
-  override def isEmpty: Boolean = {
+  def isEmpty: Boolean = {
     size == 0
   }
 
