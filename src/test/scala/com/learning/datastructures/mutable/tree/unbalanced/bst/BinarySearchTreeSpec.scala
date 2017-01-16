@@ -141,7 +141,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         bst.remove(8) ==== true
 
-        depthFirst.traverse(bst.root)(DepthFirstSearch.inOrder) ==== Seq(5, 9, 10)
+        depthFirst.traverse(bst.root)(DepthFirst.inOrder) ==== Seq(5, 9, 10)
         bst.size ==== 3
       }
 
@@ -154,7 +154,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         bst.remove(11) ==== true
 
-        depthFirst.traverse(bst.root)(DepthFirstSearch.inOrder) ==== Seq(7, 8, 9, 10, 13, 15, 16)
+        depthFirst.traverse(bst.root)(DepthFirst.inOrder) ==== Seq(7, 8, 9, 10, 13, 15, 16)
         bst.size ==== 7
       }
     }
