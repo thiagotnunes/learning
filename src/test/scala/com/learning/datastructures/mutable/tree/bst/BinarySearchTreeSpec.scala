@@ -1,12 +1,12 @@
 package com.learning.datastructures.mutable.tree.bst
 
 import com.learning.PropertySpecification
-import com.learning.datastructures.mutable.tree.TreeOps
-import org.scalacheck.{Arbitrary, Gen}
+import com.learning.datastructures.mutable.tree.DepthFirst
 import org.scalacheck.Prop.forAll
+import org.scalacheck.{Arbitrary, Gen}
 
 class BinarySearchTreeSpec extends PropertySpecification {
-  val ops = new TreeOps
+  val depthFirst = new DepthFirst
 
   "add" >> {
     "adds elements to the tree" in {
@@ -15,7 +15,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
       bst.add(3)
       bst.add(1)
 
-      ops.traverse(bst.root)(TreeOps.inOrder) ==== Seq(1, 2, 3)
+      depthFirst.traverse(bst.root)(DepthFirst.inOrder) ==== Seq(1, 2, 3)
     }
   }
 
@@ -45,7 +45,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
       bst.remove(1) ==== false
 
-      ops.traverse(bst.root)(TreeOps.inOrder) ==== Seq(2, 5)
+      depthFirst.traverse(bst.root)(DepthFirst.inOrder) ==== Seq(2, 5)
       bst.size ==== 2
     }
 
@@ -73,7 +73,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
       bst.remove(3) ==== true
 
-      ops.traverse(bst.root)(TreeOps.inOrder) ==== Seq(5, 7)
+      depthFirst.traverse(bst.root)(DepthFirst.inOrder) ==== Seq(5, 7)
       bst.size ==== 2
     }
 
@@ -87,7 +87,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         bst.remove(3) ==== true
 
-        ops.traverse(bst.root)(TreeOps.inOrder) ==== Seq(1, 2, 5)
+        depthFirst.traverse(bst.root)(DepthFirst.inOrder) ==== Seq(1, 2, 5)
         bst.size ==== 3
       }
 
@@ -100,7 +100,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         bst.remove(2) ==== true
 
-        ops.traverse(bst.root)(TreeOps.inOrder) ==== Seq(3, 4, 5)
+        depthFirst.traverse(bst.root)(DepthFirst.inOrder) ==== Seq(3, 4, 5)
         bst.size ==== 3
       }
 
@@ -113,7 +113,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         bst.remove(4) ==== true
 
-        ops.traverse(bst.root)(TreeOps.inOrder) ==== Seq(0, 2, 3, 5, 6, 7)
+        depthFirst.traverse(bst.root)(DepthFirst.inOrder) ==== Seq(0, 2, 3, 5, 6, 7)
         bst.size ==== 6
       }
     }
@@ -128,7 +128,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         bst.remove(8) ==== true
 
-        ops.traverse(bst.root)(TreeOps.inOrder) ==== Seq(5, 6, 7)
+        depthFirst.traverse(bst.root)(DepthFirst.inOrder) ==== Seq(5, 6, 7)
         bst.size ==== 3
       }
 
@@ -141,7 +141,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         bst.remove(8) ==== true
 
-        ops.traverse(bst.root)(TreeOps.inOrder) ==== Seq(5, 9, 10)
+        depthFirst.traverse(bst.root)(DepthFirstSearch.inOrder) ==== Seq(5, 9, 10)
         bst.size ==== 3
       }
 
@@ -154,7 +154,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         bst.remove(11) ==== true
 
-        ops.traverse(bst.root)(TreeOps.inOrder) ==== Seq(7, 8, 9, 10, 13, 15, 16)
+        depthFirst.traverse(bst.root)(DepthFirstSearch.inOrder) ==== Seq(7, 8, 9, 10, 13, 15, 16)
         bst.size ==== 7
       }
     }

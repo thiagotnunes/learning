@@ -2,13 +2,13 @@ package  com.learning.datastructures.mutable.tree
 
 import scala.collection.mutable.ArrayBuffer
 
-class TreeOps {
+class DepthFirst {
   def traverse[T](node: Option[Node[T]])(orderF: (Option[Node[T]], ArrayBuffer[T]) => Seq[T]): Seq[T] = {
     orderF(node, new ArrayBuffer[T]())
   }
 }
 
-object TreeOps {
+object DepthFirst {
   // O(n)
   def preOrder[T](node: Option[Node[T]], buffer: ArrayBuffer[T]): Seq[T] = {
     node match {
