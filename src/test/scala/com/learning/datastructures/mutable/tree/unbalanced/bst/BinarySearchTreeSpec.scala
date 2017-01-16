@@ -1,7 +1,7 @@
 package com.learning.datastructures.mutable.tree.unbalanced.bst
 
 import com.learning.PropertySpecification
-import com.learning.datastructures.mutable.tree.DepthFirst
+import com.learning.datastructures.mutable.tree.{DepthFirst, Node}
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Arbitrary, Gen}
 
@@ -193,6 +193,61 @@ class BinarySearchTreeSpec extends PropertySpecification {
       forAll { (xs: Seq[Int]) =>
         BinarySearchTree.from(xs) ==== BinarySearchTree.from(xs)
       }
+    }
+  }
+
+  "isValid (only for Bounded typed trees)" >> {
+    "returns true if tree is empty" in {
+      BinarySearchTree.isValid(None) ==== true
+    }
+
+    "returns true if tree is a single element tree" in {
+      BinarySearchTree.isValid(Some(Node.leaf(1))) ==== true
+    }
+
+    "returns true if tree is bst" in {
+      val root = Some(Node(
+        10,
+        Some(Node(
+          5,
+          Some(Node(
+            5,
+            Some(Node.leaf(3)),
+            None
+          )),
+          Some(Node.leaf(7))
+        )),
+        Some(Node(
+          15,
+          None,
+          Some(Node.leaf(20))
+        ))
+      ))
+
+      BinarySearchTree.isValid(root) ==== true
+    }
+
+    "returns false if tree is not bst" in {
+      val root = Some(Node(
+        10,
+        Some(Node(
+          5,
+          Some(Node(
+            5,
+            Some(Node.leaf(3)),
+            None
+          )),
+          Some(Node.leaf(7))
+        )),
+        Some(Node(
+          15,
+          None,
+          // problem is here
+          Some(Node.leaf(0))
+        ))
+      ))
+
+      BinarySearchTree.isValid(root) ==== false
     }
   }
 }

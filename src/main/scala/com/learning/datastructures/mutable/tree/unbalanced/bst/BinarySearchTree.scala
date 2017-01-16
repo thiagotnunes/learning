@@ -1,6 +1,7 @@
 package com.learning.datastructures.mutable.tree.unbalanced.bst
 
 import com.learning.datastructures.mutable.tree.Node
+import com.learning.utils.Bounded
 
 /**
   * This BST is not balanced:
@@ -149,5 +150,19 @@ object BinarySearchTree {
     val bst = new BinarySearchTree[T]()
     xs.foreach(bst.add)
     bst
+  }
+
+  def isValid[T](root: Option[Node[T]])(implicit ev: Ordering[T], bounds: Bounded[T]): Boolean = {
+    def go(root: Option[Node[T]], range: (T, T)): Boolean = {
+      root match {
+        case Some(Node(v, left, right)) =>
+          (ev.gt(v, range._1) && ev.lteq(v, range._2)) &&
+          go(left, (range._1, v)) &&
+          go(right, (v, range._2))
+        case None => true
+      }
+    }
+
+    go(root, (bounds.min, bounds.max))
   }
 }
