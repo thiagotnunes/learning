@@ -1,4 +1,4 @@
-package com.learning.datastructures.mutable.tree.bst
+package com.learning.datastructures.mutable.tree.unbalanced.bst
 
 import com.learning.datastructures.mutable.tree.Node
 
