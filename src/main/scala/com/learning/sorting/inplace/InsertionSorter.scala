@@ -1,6 +1,6 @@
 package com.learning.sorting.inplace
 
-import com.learning.Swapper
+import com.learning.utils.Swapper
 
 import scala.collection.mutable.ArrayBuffer
 

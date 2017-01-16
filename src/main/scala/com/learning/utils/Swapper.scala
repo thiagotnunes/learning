@@ -1,4 +1,4 @@
-package com.learning
+package com.learning.utils
 
 import scala.collection.mutable.ArrayBuffer
 

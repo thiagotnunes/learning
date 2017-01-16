@@ -1,6 +1,6 @@
 package com.learning.datastructures.mutable.heap
 
-import com.learning.Swapper
+import com.learning.utils.Swapper
 
 import scala.collection.mutable.ArrayBuffer
 import scala.util.Try
