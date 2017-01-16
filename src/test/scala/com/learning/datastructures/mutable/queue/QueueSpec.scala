@@ -27,14 +27,14 @@ class QueueSpec extends Specification {
     "removes element from the front of the queue" in {
       val queue = Queue.from(1, 2, 3)
 
-      queue.dequeue ==== 1
+      queue.dequeue() ==== 1
       queue.toSeq ==== Seq(2, 3)
     }
 
     "throws an exception when queue is empty" in {
       val queue = new Queue[Int](5)
 
-      queue.dequeue must throwA[RuntimeException]
+      queue.dequeue() must throwA[RuntimeException]
     }
   }
 
@@ -103,10 +103,10 @@ class QueueSpec extends Specification {
     queue.enqueue(1)
     queue.enqueue(2)
     queue.enqueue(3)
-    queue.dequeue
+    queue.dequeue()
     queue.enqueue(4)
-    queue.dequeue
-    queue.dequeue
+    queue.dequeue()
+    queue.dequeue()
     queue.enqueue(5)
     queue.enqueue(6)
 
@@ -120,8 +120,8 @@ class QueueSpec extends Specification {
 
     queue.enqueue(1)
     queue.enqueue(2)
-    queue.dequeue
-    queue.dequeue
+    queue.dequeue()
+    queue.dequeue()
     queue.enqueue(3)
     queue.enqueue(4)
 
