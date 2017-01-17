@@ -10,11 +10,11 @@ class MinBinaryHeapSpec extends PropertySpecification {
 
   "heap creation" >> {
     "does nothing when array is already a min heap" in {
-      BinaryHeap.minHeap(ArrayBuffer(1, 2, 3, 4, 5, 6, 7)).asArray ==== ArrayBuffer(1, 2, 3, 4, 5, 6, 7)
+      BinaryHeap.minHeap(ArrayBuffer(1, 2, 3, 4, 5, 6, 7)).toSeq ==== Seq(1, 2, 3, 4, 5, 6, 7)
     }
 
     "rearranges array when the input given is not a min heap" in {
-      BinaryHeap.minHeap(ArrayBuffer(7, 6, 5, 4, 3, 2, 1)).asArray ==== ArrayBuffer(1, 3, 2, 4, 6, 7, 5)
+      BinaryHeap.minHeap(ArrayBuffer(7, 6, 5, 4, 3, 2, 1)).toSeq ==== Seq(1, 3, 2, 4, 6, 7, 5)
     }
   }
 
@@ -41,7 +41,7 @@ class MinBinaryHeapSpec extends PropertySpecification {
 
         heap.extract
 
-        heap.asArray ==== ArrayBuffer(2, 3, 5, 4, 6, 7)
+        heap.toSeq ==== Seq(2, 3, 5, 4, 6, 7)
       }
     }
 
@@ -52,13 +52,13 @@ class MinBinaryHeapSpec extends PropertySpecification {
 
   "add" >> {
     "maintains min heap invariant" in {
-      val heap = BinaryHeap.minHeap(ArrayBuffer.empty[Int])
+      val heap = BinaryHeap.minHeap(ArrayBuffer(30, 65, 60))
 
       heap.add(70)
-      heap.asArray ==== ArrayBuffer(30, 65, 60, 70)
+      heap.toSeq ==== Seq(30, 65, 60, 70)
 
       heap.add(10)
-      heap.asArray ==== ArrayBuffer(10, 30, 60, 70, 65)
+      heap.toSeq ==== Seq(10, 30, 60, 70, 65)
     }
   }
 }

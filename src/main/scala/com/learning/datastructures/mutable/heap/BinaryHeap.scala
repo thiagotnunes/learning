@@ -11,7 +11,7 @@ class BinaryHeap[T] private(array: ArrayBuffer[T], heapUtils: BinaryHeapOps[T]) 
 
   // O(logn)
   def add(e: T): Unit = {
-    heap(heap.length - 1) = e
+    heap += e
     val i = size - 1
 
     heapUtils.siftUp(i, heap)
@@ -42,7 +42,7 @@ class BinaryHeap[T] private(array: ArrayBuffer[T], heapUtils: BinaryHeapOps[T]) 
   }
 
   // O(1)
-  val asArray: ArrayBuffer[T] = heap
+  val toSeq: Seq[T] = heap
 
   // O(n)
   override def equals(other: Any): Boolean = other match {
@@ -74,6 +74,8 @@ class BinaryHeap[T] private(array: ArrayBuffer[T], heapUtils: BinaryHeapOps[T]) 
 }
 
 object BinaryHeap {
+  val InitialCapacity: Int = 100
+
   def minHeap[T: Ordering](array: ArrayBuffer[T]): BinaryHeap[T] = {
     BinaryHeapOps.minHeapUtils.heapify(array)
     new BinaryHeap[T](array, BinaryHeapOps.minHeapUtils[T])

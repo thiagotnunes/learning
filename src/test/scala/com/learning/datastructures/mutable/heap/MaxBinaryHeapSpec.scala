@@ -10,11 +10,11 @@ class MaxBinaryHeapSpec extends PropertySpecification {
 
   "heap creation" >> {
     "does nothing when array is already a max heap" in {
-      BinaryHeap.maxHeap(ArrayBuffer(7, 6, 5, 4, 3, 2, 1)).asArray ==== ArrayBuffer(7, 6, 5, 4, 3, 2, 1)
+      BinaryHeap.maxHeap(ArrayBuffer(7, 6, 5, 4, 3, 2, 1)).toSeq ==== Seq(7, 6, 5, 4, 3, 2, 1)
     }
 
     "rearranges array when the input given is not a max heap" in {
-      BinaryHeap.maxHeap(ArrayBuffer(1, 2, 3, 4, 5, 6, 7)).asArray ==== ArrayBuffer(7, 5, 6, 4, 2, 1, 3)
+      BinaryHeap.maxHeap(ArrayBuffer(1, 2, 3, 4, 5, 6, 7)).toSeq ==== Seq(7, 5, 6, 4, 2, 1, 3)
     }
   }
 
@@ -41,7 +41,7 @@ class MaxBinaryHeapSpec extends PropertySpecification {
 
         heap.extract
 
-        heap.asArray ==== ArrayBuffer(6, 5, 3, 4, 2, 1)
+        heap.toSeq ==== Seq(6, 5, 3, 4, 2, 1)
       }
     }
 
@@ -55,19 +55,19 @@ class MaxBinaryHeapSpec extends PropertySpecification {
       val heap = BinaryHeap.maxHeap(ArrayBuffer.empty[Int])
 
       heap.add(10)
-      heap.asArray ==== ArrayBuffer(10)
+      heap.toSeq ==== ArrayBuffer(10)
 
       heap.add(20)
-      heap.asArray ==== ArrayBuffer(20, 10)
+      heap.toSeq ==== Seq(20, 10)
 
       heap.add(30)
-      heap.asArray ==== ArrayBuffer(30, 10, 20)
+      heap.toSeq ==== Seq(30, 10, 20)
 
       heap.add(15)
-      heap.asArray ==== ArrayBuffer(30, 15, 20, 10)
+      heap.toSeq ==== Seq(30, 15, 20, 10)
 
       heap.add(40)
-      heap.asArray ==== ArrayBuffer(40, 30, 20, 10, 15)
+      heap.toSeq ==== Seq(40, 30, 20, 10, 15)
     }
   }
 }
