@@ -1,5 +1,6 @@
 package com.learning.datastructures.mutable.tree
 
+import com.learning.datastructures.mutable.tree.bst.unbalanced.Node
 import org.specs2.mutable.Specification
 
 class BreadthFirstSpec extends Specification {

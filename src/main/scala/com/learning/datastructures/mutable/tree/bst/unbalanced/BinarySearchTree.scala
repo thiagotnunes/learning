@@ -1,6 +1,5 @@
-package com.learning.datastructures.mutable.tree.unbalanced.bst
+package com.learning.datastructures.mutable.tree.bst.unbalanced
 
-import com.learning.datastructures.mutable.tree.Node
 import com.learning.utils.Bounded
 
 /**
