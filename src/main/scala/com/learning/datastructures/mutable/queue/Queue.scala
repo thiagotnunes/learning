@@ -3,16 +3,24 @@ package com.learning.datastructures.mutable.queue
 import scala.collection.mutable.ArrayBuffer
 import scala.reflect.ClassTag
 
-class Queue[T: ClassTag](capacity: Int) {
-  private val array: Array[T] = Array.ofDim[T](capacity)
+class Queue[T: ClassTag](initialCapacity: Int) {
+  private var currentCapacity: Int = if (initialCapacity > 0) initialCapacity else Queue.InitialCapacity
+  private var array: Array[T] = Array.ofDim[T](currentCapacity)
   private var start: Int = 0
   private var end: Int = 0
   private var count: Int = 0
 
+  def this() {
+    this(Queue.InitialCapacity)
+  }
+
   // O(1)
   def enqueue(e: T): Unit = {
     if (isFull) {
-      throw new RuntimeException(s"Capacity of $capacity elements reached")
+      currentCapacity = currentCapacity * 2
+      val newArray = Array.ofDim[T](currentCapacity)
+      Array.copy(array, 0, newArray, 0, array.length)
+      array = newArray
     } else {
       array(end) = e
       end = (end + 1) % capacity
@@ -64,9 +72,15 @@ class Queue[T: ClassTag](capacity: Int) {
     }
     buffer
   }
+
+  def capacity: Int = {
+    currentCapacity
+  }
 }
 
 object Queue {
+  val InitialCapacity: Int = 100
+
   def from[T: ClassTag](xs: T*): Queue[T] = {
     val queue = new Queue[T](xs.size)
     for (i <- 0 until xs.size) {

@@ -14,12 +14,13 @@ class QueueSpec extends Specification {
       queue.toSeq ==== Seq(1, 2)
     }
 
-    "throws an exception when max capacity is reached" in {
+    "increases the capacity by factor of 2 when is full" in {
       val queue = new Queue[Int](1)
 
       queue.enqueue(1)
+      queue.enqueue(2)
 
-      queue.enqueue(2) must throwA[RuntimeException]
+      queue.capacity ==== 2
     }
   }
 
