@@ -5,8 +5,8 @@ import com.learning.datastructures.mutable.queue.Queue
 import scala.collection.mutable.ArrayBuffer
 
 class BreadthFirst {
-  def traverse[T](root: Option[Node[T]], size: Int): Seq[T] = {
-    val queue = new Queue[Node[T]](size)
+  def traverse[T](root: Option[Node[T]]): Seq[T] = {
+    val queue = new Queue[Node[T]]()
     val result = new ArrayBuffer[T]()
 
     root.foreach(queue.enqueue)

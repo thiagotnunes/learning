@@ -24,10 +24,10 @@ class BreadthFirstSpec extends Specification {
   )
 
   "traverses the tree level by level" in {
-    breadthFirst.traverse(Some(root), 5) ==== Seq(1, 2, 4, 3, 5)
+    breadthFirst.traverse(Some(root)) ==== Seq(1, 2, 4, 3, 5)
   }
 
   "returns empty sequence when given node is None" in {
-    breadthFirst.traverse(None, 0) ==== Seq()
+    breadthFirst.traverse(None) ==== Seq()
   }
 }
