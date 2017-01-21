@@ -15,9 +15,9 @@ object DepthFirst {
     root match {
       case None => buffer
       case Some(node) =>
-        buffer += node.getE
-        preOrder(node.getLeft, buffer)
-        preOrder(node.getRight, buffer)
+        buffer += node.e
+        preOrder(node.left, buffer)
+        preOrder(node.right, buffer)
     }
   }
 
@@ -26,9 +26,9 @@ object DepthFirst {
     root match {
       case None => buffer
       case Some(node) =>
-        inOrder(node.getLeft, buffer)
-        buffer += node.getE
-        inOrder(node.getRight, buffer)
+        inOrder(node.left, buffer)
+        buffer += node.e
+        inOrder(node.right, buffer)
     }
   }
 
@@ -37,9 +37,9 @@ object DepthFirst {
     root match {
       case None => buffer
       case Some(node) =>
-        postOrder(node.getLeft, buffer)
-        postOrder(node.getRight, buffer)
-        buffer += node.getE
+        postOrder(node.left, buffer)
+        postOrder(node.right, buffer)
+        buffer += node.e
     }
   }
 }

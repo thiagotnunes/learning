@@ -12,9 +12,9 @@ class BreadthFirst {
     root.foreach(queue.enqueue)
     while (!queue.isEmpty) {
       val node = queue.dequeue()
-      result += node.getE
-      node.getLeft.foreach(queue.enqueue)
-      node.getRight.foreach(queue.enqueue)
+      result += node.e
+      node.left.foreach(queue.enqueue)
+      node.right.foreach(queue.enqueue)
     }
 
     result
