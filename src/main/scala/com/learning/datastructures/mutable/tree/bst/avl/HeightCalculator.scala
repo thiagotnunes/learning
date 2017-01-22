@@ -8,7 +8,7 @@ class HeightCalculator {
     ) + 1
   }
 
-  private def fromNode[T](node: Option[Node[T]]): Int = {
+  def fromNode[T](node: Option[Node[T]]): Int = {
     node match {
       case Some(Node(_, _, _, height)) => height
       case None => 0

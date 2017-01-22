@@ -4,7 +4,8 @@ import org.specs2.mutable.Specification
 
 class RotatorSpec extends Specification {
 
-  val rotator = new Rotator
+  val heightCalculator = new HeightCalculator
+  val rotator = new Rotator(heightCalculator)
 
   "rotateLeft" >> {
     "returns updated root node" in {
