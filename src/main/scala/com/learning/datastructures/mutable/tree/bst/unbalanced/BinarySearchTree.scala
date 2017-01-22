@@ -45,53 +45,41 @@ class BinarySearchTree[T](implicit ev: Ordering[T]) {
 
   // O(h)
   def remove(e: T): Boolean = {
-    def go(node: Option[Node[T]]): Boolean = {
-      node match {
-        case Some(node@Node(_, Some(Node(v, left, right)), _)) if ev.equiv(e, v) =>
-          (left, right) match {
-            // Node to be removed is a leaf or has only one child
-            case (_, None) =>
-              node.left = left
-              currentSize = currentSize - 1
-            case (None, _) =>
-              node.left = right
-              currentSize = currentSize - 1
-            // Node to be removed has two children
-            case _ =>
-              val maxElement = max(left).get
-              remove(maxElement)
-              node.left = Some(Node(maxElement, left, right))
-          }
-          true
-        case Some(node@Node(_, _, Some(Node(v, left, right)))) if ev.equiv(e, v) =>
-          (left, right) match {
-            // Node to be removed is a leaf or has only one child
-            case (_, None) =>
-              node.right = left
-              currentSize = currentSize - 1
-            case (None, _) =>
-              node.right = right
-              currentSize = currentSize - 1
-            // Node to be removed has two children
-            case _ =>
-              val maxElement = max(left).get
-              remove(maxElement)
-              node.right = Some(Node(maxElement, left, right))
-          }
-          true
-
-        case Some(Node(v, left, _)) if ev.lteq(e, v) => go(left)
-        case Some(Node(v, _, right)) if ev.gt(e, v) => go(right)
-        case None => false
-      }
+    val removalSuccessful = rootNode match {
+      case Some(Node(v, left, None)) if ev.equiv(e, v) =>
+        rootNode = left
+        true
+      case Some(Node(v, _, right)) if ev.equiv(e, v) =>
+        rootNode = right
+        true
+      case _ => remove(rootNode, null, e)
     }
 
-    if (rootNode.map(_.e).contains(e)) {
-      rootNode = None
+    if (removalSuccessful) {
       currentSize = currentSize - 1
-      true
-    } else {
-      go(root)
+    }
+
+    removalSuccessful
+  }
+
+  // O(h)
+  private def remove(node: Option[Node[T]], parent: Node[T], e: T): Boolean = {
+    node match {
+      case Some(n@Node(v, left, right)) if ev.equiv(e, v) =>
+        (left, right, parent.left == node) match {
+          case (l, None, true) => parent.left = l
+          case (l, None, false) => parent.right = l
+          case (None, r, true) => parent.left = r
+          case (None, r, false) => parent.right = r
+          case _ =>
+            val maxElement = max(left).get
+            n.e = maxElement
+            remove(left, n, maxElement)
+        }
+        true
+      case Some(n@Node(v, left, _)) if ev.lteq(e, v) => remove(left, n, e)
+      case Some(n@Node(v, _, right)) if ev.gteq(e, v) => remove(right, n, e)
+      case None => false
     }
   }
 
@@ -156,8 +144,8 @@ object BinarySearchTree {
       root match {
         case Some(Node(v, left, right)) =>
           (ev.gt(v, range._1) && ev.lteq(v, range._2)) &&
-          go(left, (range._1, v)) &&
-          go(right, (v, range._2))
+            go(left, (range._1, v)) &&
+            go(right, (v, range._2))
         case None => true
       }
     }
