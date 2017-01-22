@@ -49,6 +49,10 @@ class AvlTree[T](rotator: Rotator,
     currentSize = currentSize + 1
   }
 
+  def size: Int = {
+    currentSize
+  }
+
   def root: Option[Node[T]] = {
     rootNode
   }
