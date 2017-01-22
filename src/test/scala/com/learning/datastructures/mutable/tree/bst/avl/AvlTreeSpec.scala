@@ -106,4 +106,24 @@ class AvlTreeSpec extends PropertySpecification {
       }
     }
   }
+
+  "find" >> {
+    "find" >> {
+      "returns element when it is in the tree" in {
+        AvlTree
+          .from(Seq(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+          .find(5) ==== Some(5)
+      }
+
+      "returns None when element is not in the tree" in {
+        AvlTree
+          .from(Seq(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+          .find(0) ==== None
+      }
+
+      "returns None when searching in an empty tree" in {
+        AvlTree.getInstance[Int].find(5) ==== None
+      }
+    }
+  }
 }

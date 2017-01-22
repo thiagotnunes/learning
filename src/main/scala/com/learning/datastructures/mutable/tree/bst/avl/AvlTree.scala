@@ -49,6 +49,19 @@ class AvlTree[T](rotator: Rotator,
     currentSize = currentSize + 1
   }
 
+  def find(e: T): Option[T] = {
+    def go(node: Option[Node[T]]): Option[T] = {
+      node match {
+        case Some(Node(v, _, _, _)) if ev.equiv(e, v) => Some(v)
+        case Some(Node(v, left, _, _)) if ev.lt(e, v) => go(left)
+        case Some(Node(_, _, right, _)) => go(right)
+        case None => None
+      }
+    }
+
+    go(root)
+  }
+
   def size: Int = {
     currentSize
   }
@@ -82,5 +95,11 @@ object AvlTree {
     val heightCalculator = new HeightCalculator
     val rotator = new Rotator(heightCalculator)
     new AvlTree[T](rotator, heightCalculator)
+  }
+
+  def from[T: Ordering](xs: Seq[T]): AvlTree[T] = {
+    val tree = getInstance[T]
+    xs.foreach(tree.add)
+    tree
   }
 }
