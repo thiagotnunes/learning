@@ -72,3 +72,11 @@ class AvlTree[T](rotator: Rotator,
     }
   }
 }
+
+object AvlTree {
+  def getInstance[T: Ordering]: AvlTree[T] = {
+    val heightCalculator = new HeightCalculator
+    val rotator = new Rotator(heightCalculator)
+    new AvlTree[T](rotator, heightCalculator)
+  }
+}
