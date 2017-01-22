@@ -14,6 +14,7 @@ class AvlTree[T](rotator: Rotator,
   private var rootNode: Option[Node[T]] = None
   private var currentSize: Int = 0
 
+  // O(logn)
   def add(e: T): Unit = {
     def go(node: Node[T]): Option[Node[T]] = {
       node match {
@@ -49,6 +50,7 @@ class AvlTree[T](rotator: Rotator,
     currentSize = currentSize + 1
   }
 
+  // O(h)
   def find(e: T): Option[T] = {
     def go(node: Option[Node[T]]): Option[T] = {
       node match {
@@ -62,10 +64,12 @@ class AvlTree[T](rotator: Rotator,
     go(root)
   }
 
+  // O(1)
   def size: Int = {
     currentSize
   }
 
+  // O(1)
   def root: Option[Node[T]] = {
     rootNode
   }
