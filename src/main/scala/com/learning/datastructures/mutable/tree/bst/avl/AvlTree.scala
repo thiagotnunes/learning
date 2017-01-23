@@ -14,7 +14,7 @@ class AvlTree[T](rotator: Rotator,
   private var rootNode: Option[Node[T]] = None
   private var currentSize: Int = 0
 
-  // O(logn)
+  // O(h)
   def add(e: T): Unit = {
     def go(node: Node[T]): Option[Node[T]] = {
       node match {
@@ -28,11 +28,11 @@ class AvlTree[T](rotator: Rotator,
         case LeftLeft =>
           Option(rotator.rotateRight(node))
         case LeftRight =>
-          node.left = Some(rotator.rotateLeft(node.left.get))
-          Option(rotator.rotateRight(node))
-        case RightLeft =>
           node.right = Some(rotator.rotateRight(node.right.get))
           Option(rotator.rotateLeft(node))
+        case RightLeft =>
+          node.left = Some(rotator.rotateLeft(node.left.get))
+          Option(rotator.rotateRight(node))
         case RightRight =>
           Option(rotator.rotateLeft(node))
         case Balanced =>
@@ -80,11 +80,11 @@ class AvlTree[T](rotator: Rotator,
       if (heightCalculator.fromNode(node.left.flatMap(_.left)) >= heightCalculator.fromNode(node.left.flatMap(_.right))) {
         LeftLeft
       } else {
-        LeftRight
+        RightLeft
       }
     } else if (balance < -1) {
       if (heightCalculator.fromNode(node.right.flatMap(_.left)) >= heightCalculator.fromNode(node.right.flatMap(_.right))) {
-        RightLeft
+        LeftRight
       } else {
         RightRight
       }
