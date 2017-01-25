@@ -45,41 +45,35 @@ class BinarySearchTree[T](implicit ev: Ordering[T]) {
 
   // O(h)
   def remove(e: T): Boolean = {
-    val removalSuccessful = rootNode match {
-      case Some(Node(v, left, None)) if ev.equiv(e, v) =>
-        rootNode = left
-        true
-      case Some(Node(v, _, right)) if ev.equiv(e, v) =>
-        rootNode = right
-        true
-      case _ => remove(rootNode, null, e)
-    }
+    val (success, newNode) = remove(rootNode, e)
 
-    if (removalSuccessful) {
+    if (success) {
+      rootNode = newNode
       currentSize = currentSize - 1
     }
 
-    removalSuccessful
+    success
   }
 
   // O(h)
-  private def remove(node: Option[Node[T]], parent: Node[T], e: T): Boolean = {
+  private def remove(node: Option[Node[T]], e: T): (Boolean, Option[Node[T]]) = {
     node match {
-      case Some(n@Node(v, left, right)) if ev.equiv(e, v) =>
-        (left, right, parent.left == node) match {
-          case (l, None, true) => parent.left = l
-          case (l, None, false) => parent.right = l
-          case (None, r, true) => parent.left = r
-          case (None, r, false) => parent.right = r
-          case _ =>
-            val maxElement = max(left).get
-            n.e = maxElement
-            remove(left, n, maxElement)
-        }
-        true
-      case Some(n@Node(v, left, _)) if ev.lteq(e, v) => remove(left, n, e)
-      case Some(n@Node(v, _, right)) if ev.gteq(e, v) => remove(right, n, e)
-      case None => false
+      case Some(Node(v, left, None)) if ev.equiv(e, v) => (true, left)
+      case Some(Node(v, None, right)) if ev.equiv(e, v) => (true, right)
+      case Some(n@Node(v, left, _)) if ev.equiv(e, v) =>
+        val maxElement = max(left).get
+        n.e = maxElement
+        remove(left, maxElement)
+        (true, node)
+      case Some(n@Node(v, left, _)) if ev.lteq(e, v) =>
+        val (success, newNode) = remove(left, e)
+        n.left = newNode
+        (success, node)
+      case Some(n@Node(v, _, right)) if ev.gteq(e, v) =>
+        val (success, newNode) = remove(right, e)
+        n.right = newNode
+        (success, node)
+      case None => (false, node)
     }
   }
 

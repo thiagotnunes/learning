@@ -222,7 +222,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
       BinarySearchTree.isValid(Some(Node.leaf(1))) ==== true
     }
 
-    "returns true if tree is tree" in {
+    "returns true if tree is binary search tree" in {
       val root = Some(Node(
         10,
         Some(Node(
@@ -244,7 +244,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
       BinarySearchTree.isValid(root) ==== true
     }
 
-    "returns false if tree is not tree" in {
+    "returns false if tree is not binary search tree" in {
       val root = Some(Node(
         10,
         Some(Node(
