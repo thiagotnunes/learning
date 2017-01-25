@@ -7,7 +7,6 @@ import org.scalacheck.Prop.forAll
 import org.scalacheck.{Arbitrary, Gen}
 
 class BinarySearchTreeSpec extends PropertySpecification {
-  val depthFirst = new DepthFirst
 
   "add" >> {
     "adds elements to the tree" in {
@@ -16,7 +15,11 @@ class BinarySearchTreeSpec extends PropertySpecification {
       tree.add(3)
       tree.add(1)
 
-      depthFirst.traverse(tree.root)(DepthFirst.inOrder) ==== Seq(1, 2, 3)
+      tree.root ==== Some(Node(
+        2,
+        Some(Node.leaf(1)),
+        Some(Node.leaf(3))
+      ))
     }
   }
 
@@ -46,7 +49,11 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
       tree.remove(1) ==== false
 
-      depthFirst.traverse(tree.root)(DepthFirst.inOrder) ==== Seq(2, 5)
+      tree.root ==== Some(Node(
+        5,
+        Some(Node.leaf(2)),
+        None
+      ))
       tree.size ==== 2
     }
 
@@ -55,6 +62,7 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
       tree.remove(1) ==== false
 
+      tree.root ==== None
       tree.size ==== 0
     }
 
@@ -90,7 +98,11 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
       tree.remove(3) ==== true
 
-      depthFirst.traverse(tree.root)(DepthFirst.inOrder) ==== Seq(5, 7)
+      tree.root ==== Some(Node(
+        5,
+        None,
+        Some(Node.leaf(7))
+      ))
       tree.size ==== 2
     }
 
@@ -104,7 +116,15 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         tree.remove(3) ==== true
 
-        depthFirst.traverse(tree.root)(DepthFirst.inOrder) ==== Seq(1, 2, 5)
+        tree.root ==== Some(Node(
+          5,
+          Some(Node(
+            2,
+            Some(Node.leaf(1)),
+            None
+          )),
+          None
+        ))
         tree.size ==== 3
       }
 
@@ -117,7 +137,15 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         tree.remove(2) ==== true
 
-        depthFirst.traverse(tree.root)(DepthFirst.inOrder) ==== Seq(3, 4, 5)
+        tree.root ==== Some(Node(
+          5,
+          Some(Node(
+            3,
+            None,
+            Some(Node.leaf(4))
+          )),
+          None
+        ))
         tree.size ==== 3
       }
 
@@ -130,7 +158,23 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         tree.remove(4) ==== true
 
-        depthFirst.traverse(tree.root)(DepthFirst.inOrder) ==== Seq(0, 2, 3, 5, 6, 7)
+        tree.root ==== Some(Node(
+          7,
+          Some(Node(
+            3,
+            Some(Node(
+              2,
+              Some(Node.leaf(0)),
+              None
+            )),
+            Some(Node(
+              5,
+              None,
+              Some(Node.leaf(6))
+            ))
+          )),
+          None
+        ))
         tree.size ==== 6
       }
     }
@@ -145,7 +189,15 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         tree.remove(8) ==== true
 
-        depthFirst.traverse(tree.root)(DepthFirst.inOrder) ==== Seq(5, 6, 7)
+        tree.root ==== Some(Node(
+          5,
+          None,
+          Some(Node(
+            7,
+            Some(Node.leaf(6)),
+            None
+          ))
+        ))
         tree.size ==== 3
       }
 
@@ -158,7 +210,15 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         tree.remove(8) ==== true
 
-        depthFirst.traverse(tree.root)(DepthFirst.inOrder) ==== Seq(5, 9, 10)
+        tree.root ==== Some(Node(
+          5,
+          None,
+          Some(Node(
+            9,
+            None,
+            Some(Node.leaf(10))
+          ))
+        ))
         tree.size ==== 3
       }
 
@@ -171,7 +231,23 @@ class BinarySearchTreeSpec extends PropertySpecification {
 
         tree.remove(11) ==== true
 
-        depthFirst.traverse(tree.root)(DepthFirst.inOrder) ==== Seq(7, 8, 9, 10, 13, 15, 16)
+        tree.root ==== Some(Node(
+          7,
+          None,
+          Some(Node(
+            10,
+            Some(Node(
+              9,
+              Some(Node.leaf(8)),
+              None
+            )),
+            Some(Node(
+              15,
+              Some(Node.leaf(13)),
+              Some(Node.leaf(16))
+            ))
+          ))
+        ))
         tree.size ==== 7
       }
     }
