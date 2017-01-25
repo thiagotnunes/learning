@@ -54,6 +54,7 @@ class AvlTree[T](rebalancer: Rebalancer[T])(implicit ev: Ordering[T]) {
         val maxElement = max(left).get
         n.e = maxElement
         remove(left, maxElement)
+        (true, node)
 
       // e < v, go left
       case Some(n@Node(v, left, _, _)) if ev.lt(e, v) =>

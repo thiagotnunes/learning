@@ -245,6 +245,44 @@ class AvlTreeSpec extends PropertySpecification {
       }
     }
 
+    "removes element with two children from a tree" in {
+      //             7 (4)
+      //    5 (2)           11 (3)
+      // 1 (1)      9 (2)           15 (2)
+      //          8(1) 10(1)      13(1) 16 (1)
+      val tree = AvlTree.from(Seq(7, 5, 11, 1, 9, 15, 8, 10, 13, 16))
+
+      tree.remove(11) ==== true
+
+      tree.root === Some(Node(
+        7,
+        Some(Node(
+          5,
+          Some(Node.leaf(1)),
+          None,
+          2
+        )),
+        Some(Node(
+          10,
+          Some(Node(
+            9,
+            Some(Node.leaf(8)),
+            None,
+            2
+          )),
+          Some(Node(
+            15,
+            Some(Node.leaf(13)),
+            Some(Node.leaf(16)),
+            2
+          )),
+          3
+        )),
+        4
+      ))
+      tree.size ==== 9
+    }
+
     "rebalances the tree" in {
       /*
                          500 (5)
