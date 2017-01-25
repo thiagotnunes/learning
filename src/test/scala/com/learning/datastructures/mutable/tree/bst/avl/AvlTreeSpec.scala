@@ -157,7 +157,7 @@ class AvlTreeSpec extends PropertySpecification {
     "removes the root node with left child" in {
       val tree = AvlTree.from(Seq(10, 5))
 
-      tree.remove(10)
+      tree.remove(10) ==== true
 
       tree.root ==== Some(Node.leaf(5))
     }
@@ -165,7 +165,7 @@ class AvlTreeSpec extends PropertySpecification {
     "removes the root node with right child" in {
       val tree = AvlTree.from(Seq(10, 15))
 
-      tree.remove(10)
+      tree.remove(10) ==== true
 
       tree.root ==== Some(Node.leaf(15))
     }
@@ -238,7 +238,7 @@ class AvlTreeSpec extends PropertySpecification {
         //        9
         val tree = AvlTree.from(Seq(5, 3, 7, 9))
 
-        tree.remove(3)
+        tree.remove(3) ==== true
 
         tree.root ==== Some(Node(7, Some(Node.leaf(5)), Some(Node.leaf(9)), 2))
         tree.size ==== 3
@@ -283,7 +283,7 @@ class AvlTreeSpec extends PropertySpecification {
       tree.size ==== 9
     }
 
-    "rebalances the tree" in {
+    "rebalances the tree in the worst case (logn rotations)" in {
       /*
                          500 (5)
             250 (3)                   750 (4)
@@ -300,7 +300,7 @@ class AvlTreeSpec extends PropertySpecification {
       */
       val tree = AvlTree.from(Seq(500, 250, 750, 200, 300, 700, 900, 350, 725, 850, 950, 975))
 
-      tree.remove(200)
+      tree.remove(200) ==== true
 
       tree.root ==== Some(Node(
         750,
