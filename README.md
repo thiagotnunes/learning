@@ -9,6 +9,9 @@ Below you can see a list of the current implementations
 - Dynamic Array
 - Singly Linked List
 - Heap
+- Binary Search Trees
+  - Unbalanced trees
+  - AVL trees
 
 ## Sorting
 
