@@ -21,3 +21,4 @@ Below you can see a list of the current implementations
 - Merge Sort
 - Quick Sort
 - Heap Sort
+- Binary Search Tree Sort
