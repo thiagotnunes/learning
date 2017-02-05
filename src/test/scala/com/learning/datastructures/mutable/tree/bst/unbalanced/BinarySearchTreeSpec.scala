@@ -1,8 +1,6 @@
-package com.learning.datastructures.mutable.tree.unbalanced
+package com.learning.datastructures.mutable.tree.bst.unbalanced
 
 import com.learning.PropertySpecification
-import com.learning.datastructures.mutable.tree.DepthFirst
-import com.learning.datastructures.mutable.tree.bst.unbalanced.{BinarySearchTree, Node}
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Arbitrary, Gen}
 

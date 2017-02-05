@@ -1,7 +1,7 @@
 package com.learning.datastructures.mutable.tree.bst.avl
 
 import com.learning.PropertySpecification
-import com.learning.datastructures.mutable.tree.DepthFirst
+import com.learning.datastructures.mutable.tree.traversal.DepthFirst
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Arbitrary, Gen}
 
@@ -76,11 +76,11 @@ class AvlTreeSpec extends PropertySpecification {
 
     "maintains tree in order" in {
       val search = new DepthFirst
-      forAll { (xs: Seq[Int]) =>
+      forAll(Gen.nonEmptyListOf(Arbitrary.arbitrary[Int])) { (xs: Seq[Int]) =>
         val tree = AvlTree.getInstance[Int]
         xs.foreach(tree.add)
 
-        search.traverse(tree.root)(DepthFirst.inOrder) ==== xs.sorted
+        search.traverse(tree.root.get)(DepthFirst.inOrder[Int, Node]) ==== xs.sorted
       }
     }
 

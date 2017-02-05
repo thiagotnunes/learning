@@ -1,4 +1,4 @@
-package com.learning.datastructures.mutable.tree
+package com.learning.datastructures.mutable.tree.traversal
 
 import com.learning.datastructures.mutable.tree.bst.unbalanced.Node
 import org.specs2.mutable.Specification
@@ -25,10 +25,6 @@ class BreadthFirstSpec extends Specification {
   )
 
   "traverses the tree level by level" in {
-    breadthFirst.traverse(Some(root)) ==== Seq(1, 2, 4, 3, 5)
-  }
-
-  "returns empty sequence when given node is None" in {
-    breadthFirst.traverse(None) ==== Seq()
+    breadthFirst.traverse(root) ==== Seq(1, 2, 4, 3, 5)
   }
 }
