@@ -14,13 +14,13 @@ class UnionFindDisjointSetsSpec extends Specification {
     "makeSet makes set by setting the parent to be None and rank to be 0" in new Context {
       sets.makeSet(0) ==== true
 
-      sets.sets ==== Seq(SetNode(0, 0, None))
+      sets.nodes ==== Seq(SetNode(0, 0, None))
     }
 
     "makeSet does nothing if set already exists" in new Context {
       sets.makeSet(0) ==== true
       sets.makeSet(0) ==== false
-      sets.sets ==== Seq(SetNode(0, 0, None))
+      sets.nodes ==== Seq(SetNode(0, 0, None))
     }
   }
 
@@ -104,6 +104,6 @@ class UnionFindDisjointSetsSpec extends Specification {
     sets.union(0, 3)
 
     sets.findSet(3) ==== Some(SetNode(0, 2, None))
-    sets.sets.find(_.data == 3).flatMap(_.parent) ==== Some(SetNode(0, 2, None))
+    sets.nodes.find(_.data == 3).flatMap(_.parent) ==== Some(SetNode(0, 2, None))
   }
 }

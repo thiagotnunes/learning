@@ -44,7 +44,7 @@ class UnionFindDisjointSets {
     }
   }
 
-  def sets: Iterable[SetNode] = {
+  def nodes: Iterable[SetNode] = {
     elements.values
   }
 
