@@ -26,14 +26,14 @@ class AdjacencyListGraphSpec extends Specification {
     "adds an edge between two nodes" in new Context {
       graph.addEdge(0, 1, 10) ==== true
 
-      graph.edgesFrom(0) ==== Seq(Edge(1, 10))
+      graph.edgesFrom(0) ==== Seq(Edge(0, 1, 10))
     }
 
     "returns false when adding duplicate edge" in new Context {
       graph.addEdge(0, 1, 10)
 
       graph.addEdge(0, 1, 20) ==== false
-      graph.edgesFrom(0) ==== Seq(Edge(1, 10))
+      graph.edgesFrom(0) ==== Seq(Edge(0, 1, 10))
     }
 
     "throws an exception when trying to add edge from non-existing node" in new Context {
@@ -51,7 +51,7 @@ class AdjacencyListGraphSpec extends Specification {
       graph.addEdge(0, 2, 20)
       graph.addEdge(0, 4, 40)
 
-      graph.edgesFrom(0) ==== Seq(Edge(1, 10), Edge(2, 20), Edge(4, 40))
+      graph.edgesFrom(0) ==== Seq(Edge(0, 1, 10), Edge(0, 2, 20), Edge(0, 4, 40))
     }
 
     "throws an exception when given node is out of bounds" in new Context {
@@ -82,7 +82,7 @@ class AdjacencyListGraphSpec extends Specification {
 
       graph.removeEdge(0, 2) ==== true
 
-      graph.edgesFrom(0) ==== Seq(Edge(1, 10), Edge(3, 30))
+      graph.edgesFrom(0) ==== Seq(Edge(0, 1, 10), Edge(0, 3, 30))
     }
 
     "returns false when no edge was removed" in new Context {

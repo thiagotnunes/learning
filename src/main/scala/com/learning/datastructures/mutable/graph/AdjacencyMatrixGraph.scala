@@ -9,7 +9,13 @@ class AdjacencyMatrixGraph(vertices: Int) extends Graph {
     throw new IllegalArgumentException("graph needs at least one vertex")
   }
 
+  // O(V^2)
   private val adjacencyMatrix = ArrayBuffer.fill(vertices, vertices)(NoEdge)
+
+  // O(V)
+  override def allVertices: Seq[Int] = {
+    0.until(vertices)
+  }
 
   // O(1)
   override def addEdge(from: Int, to: Int, weight: Int): Boolean = {
@@ -49,7 +55,7 @@ class AdjacencyMatrixGraph(vertices: Int) extends Graph {
       adjacencyMatrix(from)
         .zipWithIndex
         .filter { case (weight, _) => weight > NoEdge }
-        .map { case (weight, to) => Edge(to, weight) }
+        .map { case (weight, to) => Edge(from, to, weight) }
     }
   }
 
@@ -72,6 +78,7 @@ class AdjacencyMatrixGraph(vertices: Int) extends Graph {
     n < 0 || n >= numberOfVertices
   }
 
+  // O(1)
   private def isValidWeight(weight: Int): Boolean = {
     weight > NoEdge
   }

@@ -11,6 +11,11 @@ class AdjacencyListGraph(vertices: Int) extends Graph {
   private val adjacencyList = ArrayBuffer.fill(vertices)(ArrayBuffer.empty[Edge])
 
   // O(V)
+  override def allVertices: Seq[Int] = {
+    0.until(vertices)
+  }
+
+  // O(V)
   override def addEdge(from: Int, to: Int, weight: Int): Boolean = {
     if (isOutOfBounds(from)) {
       throw new ArrayIndexOutOfBoundsException(from)
@@ -18,7 +23,7 @@ class AdjacencyListGraph(vertices: Int) extends Graph {
       throw new ArrayIndexOutOfBoundsException(to)
     } else {
       if (!adjacencyList(from).exists(_.to == to)) {
-        adjacencyList(from).append(Edge(to, weight))
+        adjacencyList(from).append(Edge(from, to, weight))
         true
       } else {
         false
