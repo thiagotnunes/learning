@@ -21,7 +21,7 @@ class Djikstra {
     val queue = new PriorityQueue[Int]()
 
     val vertices = graph.allVertices // O(V)
-    vertices.foreach(v => queue.enqueue(v, Integer.MAX_VALUE)) // O(VlogV)
+    vertices.foreach(v => queue.enqueue(v, Integer.MAX_VALUE)) // O(V)
     queue.decreasePriority(source, 0) // O(logV)
 
     vertices.foreach(v => distances.put(v, Integer.MAX_VALUE)) // O(V)
