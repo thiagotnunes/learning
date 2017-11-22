@@ -46,6 +46,7 @@
 - [Bigtable](https://research.google.com/archive/bigtable.html)
 - [Dremel](https://research.google.com/pubs/pub36632.html)
 - [Spanner](https://research.google.com/archive/spanner.html)
+- [Dapper](https://static.googleusercontent.com/media/research.google.com/en//archive/papers/dapper-2010-1.pdf)
 - [DynamoDB](http://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
 - [Raft](https://raft.github.io/raft.pdf)
 - [Scaling Memcache at Facebook](https://cs.uwaterloo.ca/~brecht/courses/854-Emerging-2014/readings/key-value/fb-memcached-nsdi-2013.pdf)
