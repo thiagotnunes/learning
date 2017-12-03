@@ -35,10 +35,9 @@ class Djikstra {
     // O(VlogV + ElogV)
     while (!queue.isEmpty) {
       val vertex = queue.dequeue() // O(logV)
+      val vertexDistance = distances(vertex)
 
       for (edge <- graph.edgesFrom(vertex)) { // In total E times
-
-        val vertexDistance = distances(vertex)
         val currentDistance = distances(edge.to)
 
         val relaxedDistance = vertexDistance + edge.weight
@@ -75,11 +74,11 @@ class Djikstra {
     // O(V)
     def nextMin(distances: mutable.Map[Int, Int], visited: mutable.Set[Int]): (Int, Int) = {
       distances.foldLeft((Integer.MAX_VALUE, Integer.MAX_VALUE)) { case (acc, (v, distance)) =>
-          if (!visited.contains(v) && distance < acc._2) {
-            (v, distance)
-          } else {
-            acc
-          }
+        if (!visited.contains(v) && distance < acc._2) {
+          (v, distance)
+        } else {
+          acc
+        }
       }
     }
 
