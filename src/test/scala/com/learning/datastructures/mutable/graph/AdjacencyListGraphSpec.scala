@@ -45,6 +45,31 @@ class AdjacencyListGraphSpec extends Specification {
     }
   }
 
+  "allEdges" >> {
+    "returns all the edges in the graph" in new Context {
+      graph.addEdge(0, 1, 10)
+      graph.addEdge(0, 2, 20)
+      graph.addEdge(0, 4, 40)
+      graph.addEdge(1, 2, 80)
+      graph.addEdge(2, 3, 160)
+      graph.addEdge(2, 4, 320)
+
+      graph.allEdges ==== Seq(
+        Edge(0, 1, 10),
+        Edge(0, 2, 20),
+        Edge(0, 4, 40),
+        Edge(1, 2, 80),
+        Edge(2, 3, 160),
+        Edge(2, 4, 320)
+      )
+    }
+
+    "returns empty array when there are no edges" in new Context {
+      graph.allEdges ==== Seq()
+    }
+  }
+
+
   "edgesFrom" >> {
     "returns all edges from the given node" in new Context {
       graph.addEdge(0, 1, 10)

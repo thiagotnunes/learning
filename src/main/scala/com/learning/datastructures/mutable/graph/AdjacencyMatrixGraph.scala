@@ -17,6 +17,19 @@ class AdjacencyMatrixGraph(vertices: Int) extends Graph {
     0.until(vertices)
   }
 
+  // O(E)
+  override def allEdges: Seq[Edge] = {
+    val edges = ArrayBuffer.empty[Edge]
+    for (i <- 0.until(vertices)) {
+      for (j <- 0.until(vertices)) {
+        if (adjacencyMatrix(i)(j) != NoEdge) {
+          edges.append(Edge(i, j, adjacencyMatrix(i)(j)))
+        }
+      }
+    }
+    edges
+  }
+
   // O(1)
   override def addEdge(from: Int, to: Int, weight: Int): Boolean = {
     if (!isValidWeight(weight)) {

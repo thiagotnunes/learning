@@ -15,6 +15,18 @@ class AdjacencyListGraph(vertices: Int) extends Graph {
     0.until(vertices)
   }
 
+  // O(E)
+  override def allEdges: Seq[Edge] = {
+    val allEdges = ArrayBuffer.empty[Edge]
+    for (i <- adjacencyList.indices) {
+      val edges = adjacencyList(i)
+      for (j <- edges.indices) {
+        allEdges.append(edges(j))
+      }
+    }
+    allEdges
+  }
+
   // O(V)
   override def addEdge(from: Int, to: Int, weight: Int): Boolean = {
     if (isOutOfBounds(from)) {
