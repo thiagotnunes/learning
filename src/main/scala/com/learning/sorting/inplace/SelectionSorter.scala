@@ -7,6 +7,9 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * - In place
   * - NOT Stable
+  *   - due to the swaps with the ith element
+  *   - imagine the array [4 2 4 1], in the first pass it will swap the 1
+  *   with the first 4, making it appear after the second 4
   * - Time complexity:
   *   - Best: O(n^^2)
   *   - Average: O(n^^2)

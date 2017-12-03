@@ -8,6 +8,9 @@ import scala.util.Random
 /**
   * - In place
   * - NOT Stable
+  *   - due to pivot selection
+  *   - imagine [1,2,2,4], if the first 2 is selected the second 2 will be
+  *   swapped to appear before the (original) first 2
   * - Time complexity:
   *   - Best: O(nlogn)
   *   - Average: O(nlogn)

@@ -8,6 +8,9 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * - In place
   * - NOT Stable
+  *   - due to heap extraction
+  *   - imagine the array [21 20a 20b 12 11 8 7], when extract max occurs we will
+  *   get the following result [7 8 11 12 20b 20a 21]
   * - Time complexity:
   *   - Best: O(nlogn) when the array is already sorted
   *   - Average: O(nlogn)
