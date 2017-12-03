@@ -66,3 +66,4 @@
 - [How We've Scaled Dropbox](https://www.youtube.com/watch?v=PE4gwstWhmc)
 - [Timelines at Scale](https://www.infoq.com/presentations/Twitter-Timeline-Scalability?utm_source=presentations_about_qcon_sf2012&utm_medium=link&utm_campaign=qcon_sf2012)
 - [Differential Synchronization](https://www.youtube.com/watch?v=S2Hp_1jqpY8)
+- [Four Distributed Systems Architectural Patterns](https://www.youtube.com/watch?v=tpspO9K28PM)
