@@ -9,6 +9,10 @@ import scala.collection.mutable.ArrayBuffer
 class Djikstra {
 
   /**
+    * Djikstra algorithm does NOT work with negative weights.
+    * A proper example of this can be seen here:
+    * https://stackoverflow.com/questions/6799172/negative-weights-using-dijkstras-algorithm
+    *
     * - V is the number of vertices in the graph
     * - E is the number of edges in the graph
     *
