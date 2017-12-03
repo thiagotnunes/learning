@@ -1,4 +1,4 @@
-package com.learning.datastructures.mutable.tree.traversal
+package com.learning.algorithms.traversal
 
 import com.learning.datastructures.mutable.tree.bst.unbalanced.Node
 import org.specs2.mutable.Specification

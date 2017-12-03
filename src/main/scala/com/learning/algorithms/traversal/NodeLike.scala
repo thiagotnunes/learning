@@ -1,4 +1,4 @@
-package com.learning.datastructures.mutable.tree.traversal
+package com.learning.algorithms.traversal
 
 import com.learning.datastructures.mutable.tree.bst.avl.{Node => AvlNode}
 import com.learning.datastructures.mutable.tree.bst.unbalanced.{Node => UnbalancedNode}

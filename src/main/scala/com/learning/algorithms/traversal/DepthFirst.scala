@@ -1,4 +1,4 @@
-package com.learning.datastructures.mutable.tree.traversal
+package com.learning.algorithms.traversal
 
 import scala.collection.mutable.ArrayBuffer
 
