@@ -1,7 +1,7 @@
 import sbt._
 import Keys._
 
-object LearningBuild extends Build {
+object Build extends Build {
   lazy val root = Project(
     "learning",
     base = file("."),
