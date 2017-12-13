@@ -17,7 +17,8 @@ object Build extends Build {
       version := "0.0.1",
       libraryDependencies ++= Seq(
         "org.specs2" %% "specs2-core" % "3.8.4" % "test",
-        "org.specs2" %% "specs2-scalacheck" % "3.8.6"
+        "org.specs2" %% "specs2-scalacheck" % "3.8.6",
+        "junit" % "junit" % "4.12" % "test"
       ),
       scalaVersion := "2.11.7"
     )
