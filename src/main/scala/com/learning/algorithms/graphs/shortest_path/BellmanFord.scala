@@ -1,4 +1,4 @@
-package com.learning.algorithms.graphs
+package com.learning.algorithms.graphs.shortest_path
 
 import com.learning.datastructures.mutable.graph.Graph
 

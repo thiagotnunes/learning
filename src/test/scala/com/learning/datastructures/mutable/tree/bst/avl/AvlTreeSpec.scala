@@ -1,7 +1,7 @@
 package com.learning.datastructures.mutable.tree.bst.avl
 
 import com.learning.PropertySpecification
-import com.learning.algorithms.traversal.DepthFirst
+import com.learning.algorithms.tree.traversal.DepthFirst
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Arbitrary, Gen}
 

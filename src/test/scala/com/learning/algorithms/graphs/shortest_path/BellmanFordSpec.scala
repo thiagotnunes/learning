@@ -1,15 +1,14 @@
-package com.learning.algorithms.graphs
+package com.learning.algorithms.graphs.shortest_path
 
-import com.learning.datastructures.mutable.graph.{AdjacencyListGraph, Graph}
+import com.learning.datastructures.mutable.graph.AdjacencyListGraph
 import org.specs2.mutable.Specification
-import org.specs2.specification.Scope
 
-class DjikstraSpec extends Specification {
+class BellmanFordSpec extends Specification {
 
-  trait Context extends Scope {
-    val graph: Graph = new AdjacencyListGraph(9)
-    val djikstra = new Djikstra
+  private val bellmanFord = new BellmanFord
 
+  "returns the shortest path" in {
+    val graph = new AdjacencyListGraph(9)
     graph.addEdge(0, 1, 4)
     graph.addEdge(0, 7, 8)
 
@@ -45,18 +44,21 @@ class DjikstraSpec extends Specification {
     graph.addEdge(8, 2, 2)
     graph.addEdge(8, 6, 6)
     graph.addEdge(8, 7, 7)
+
+    bellmanFord.shortestPath(graph)(0, 4) ==== (21, Seq(0, 7, 6, 5, 4))
   }
 
-  "using priority queues" in {
-    "returns the shortest path from source to destination" in new Context {
-      djikstra.shortestPathWithPriorityQueue(graph)(0, 4) ==== (21, Seq(0, 7, 6, 5, 4))
-    }
-  }
+  "returns the shortest path with negative edges" in {
+    val graph = new AdjacencyListGraph(4)
 
-  "without priority queues" in {
-    "returns the shortest path from source to destination" in new Context {
-      djikstra.shortestPathWithoutPriorityQueue(graph)(0, 8) ==== (14, Seq(0, 1, 2, 8))
-    }
-  }
+    graph.addEdge(0, 1, 1)
+    graph.addEdge(0, 2, 0)
+    graph.addEdge(0, 3, 99)
 
+    graph.addEdge(1, 2, 1)
+
+    graph.addEdge(3, 1, -300)
+
+    bellmanFord.shortestPath(graph)(0, 2) ==== (-200, Seq(0, 3, 1, 2))
+  }
 }
