@@ -86,6 +86,36 @@ class AdjacencyMatrixGraph(vertices: Int) extends Graph {
     }
   }
 
+  // O(V)
+  override def inDegree(from: Int): Int = {
+    if (isOutOfBounds(from)) {
+      throw new ArrayIndexOutOfBoundsException(from)
+    } else {
+      adjacencyMatrix.zipWithIndex.foldLeft(0) { case (acc, (edges, i))=>
+        if (i != from && edges(from) > NoEdge) {
+          acc + 1
+        } else {
+          acc
+        }
+      }
+    }
+  }
+
+  // O(E)
+  override def outDegree(from: Int): Int = {
+    if (isOutOfBounds(from)) {
+      throw new ArrayIndexOutOfBoundsException(from)
+    } else {
+      adjacencyMatrix(from).foldLeft(0)((acc, weight) =>
+        if (weight > NoEdge) {
+          acc + 1
+        } else {
+          acc
+        }
+      )
+    }
+  }
+
   // O(1)
   private def isOutOfBounds(n: Int): Boolean = {
     n < 0 || n >= numberOfVertices

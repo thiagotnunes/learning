@@ -14,4 +14,8 @@ trait Graph {
   def numberOfVertices: Int
 
   def numberOfEdgesFrom(from: Int): Int
+
+  def inDegree(from: Int): Int
+
+  def outDegree(from: Int): Int
 }

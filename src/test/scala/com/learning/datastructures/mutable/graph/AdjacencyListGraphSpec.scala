@@ -122,4 +122,48 @@ class AdjacencyListGraphSpec extends Specification {
       graph.removeEdge(0, 10) must throwA[ArrayIndexOutOfBoundsException]
     }
   }
+
+  "inDegree" >> {
+    "returns 0 when there are no edges incident in the given node" in new Context {
+      graph.addEdge(0, 1, 10)
+      graph.addEdge(0, 2, 20)
+      graph.addEdge(0, 3, 30)
+
+      graph.inDegree(0) ==== 0
+    }
+
+    "returns the number of incident edges in the given node" in new Context {
+      graph.addEdge(1, 0, 10)
+      graph.addEdge(2, 0, 20)
+      graph.addEdge(3, 0, 30)
+
+      graph.inDegree(0) ==== 3
+    }
+
+    "throws an exception when trying to get in degree from non-existing node" in new Context {
+      graph.inDegree(10) must throwA[ArrayIndexOutOfBoundsException]
+    }
+  }
+
+  "outDegree" >> {
+    "returns 0 when there are no edges from the given node" in new Context {
+      graph.addEdge(1, 0, 10)
+      graph.addEdge(2, 0, 20)
+      graph.addEdge(3, 0, 30)
+
+      graph.outDegree(0) ==== 0
+    }
+
+    "returns the number of edges from the given node" in new Context {
+      graph.addEdge(0, 1, 10)
+      graph.addEdge(0, 2, 20)
+      graph.addEdge(0, 3, 30)
+
+      graph.outDegree(0) ==== 3
+    }
+
+    "throws an exception when trying to get out degree from non existing node" in new Context {
+      graph.outDegree(10) must throwA[ArrayIndexOutOfBoundsException]
+    }
+  }
 }

@@ -87,6 +87,30 @@ class AdjacencyListGraph(vertices: Int) extends Graph {
     }
   }
 
+  // O(V + E)
+  override def inDegree(from: Int): Int = {
+    if (isOutOfBounds(from)) {
+      throw new ArrayIndexOutOfBoundsException(from)
+    } else {
+      adjacencyList.foldLeft(0)((acc, edges) =>
+        if (edges.exists(_.to == from)) {
+          acc + 1
+        } else {
+          acc
+        }
+      )
+    }
+  }
+
+  // O(1)
+  override def outDegree(from: Int): Int = {
+    if (isOutOfBounds(from)) {
+      throw new ArrayIndexOutOfBoundsException(from)
+    } else {
+      adjacencyList(from).size
+    }
+  }
+
   // O(1)
   private def isOutOfBounds(n: Int): Boolean = {
     n < 0 || n >= numberOfVertices
