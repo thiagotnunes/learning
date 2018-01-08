@@ -1,6 +1,6 @@
 package com.learning.sorting.inplace
 
-import com.learning.datastructures.mutable.heap.BinaryHeapOps
+import com.learning.data_structures.mutable.heap.BinaryHeapOps
 import com.learning.utils.Swapper
 
 import scala.collection.mutable.ArrayBuffer

@@ -1,6 +1,6 @@
 package com.learning.algorithms.tree.traversal
 
-import com.learning.datastructures.mutable.tree.bst.unbalanced.Node
+import com.learning.data_structures.mutable.tree.bst.unbalanced.Node
 import org.specs2.mutable.Specification
 
 class DepthFirstSpec extends Specification {

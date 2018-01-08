@@ -1,7 +1,7 @@
 package com.learning.sorting.notinplace
 
-import com.learning.datastructures.mutable.tree.bst.avl.{AvlTree, Node}
 import com.learning.algorithms.tree.traversal.DepthFirst
+import com.learning.data_structures.mutable.tree.bst.avl.{AvlTree, Node}
 
 import scala.reflect.ClassTag
 

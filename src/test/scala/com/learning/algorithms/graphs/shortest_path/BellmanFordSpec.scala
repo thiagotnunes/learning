@@ -1,6 +1,6 @@
 package com.learning.algorithms.graphs.shortest_path
 
-import com.learning.datastructures.mutable.graph.AdjacencyListGraph
+import com.learning.data_structures.mutable.graph.AdjacencyListGraph
 import org.specs2.mutable.Specification
 
 class BellmanFordSpec extends Specification {

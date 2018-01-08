@@ -1,7 +1,7 @@
 package com.learning.algorithms.graphs.topological_sort
 
 import com.learning.algorithms.graphs.DagWithCycleError
-import com.learning.datastructures.mutable.graph.{AdjacencyListGraph, Graph}
+import com.learning.data_structures.mutable.graph.{AdjacencyListGraph, Graph}
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 

@@ -1,7 +1,7 @@
 package com.learning.algorithms.graphs.shortest_path
 
-import com.learning.datastructures.mutable.graph.Graph
-import com.learning.datastructures.mutable.queue.PriorityQueue
+import com.learning.data_structures.mutable.graph.Graph
+import com.learning.data_structures.mutable.queue.PriorityQueue
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer

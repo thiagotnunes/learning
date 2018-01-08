@@ -1,8 +1,8 @@
 package com.learning.algorithms.graphs.topological_sort
 
 import com.learning.algorithms.graphs.DagWithCycleError
-import com.learning.datastructures.mutable.graph.Graph
-import com.learning.datastructures.mutable.queue.Queue
+import com.learning.data_structures.mutable.graph.Graph
+import com.learning.data_structures.mutable.queue.Queue
 
 import scala.collection.mutable.ArrayBuffer
 

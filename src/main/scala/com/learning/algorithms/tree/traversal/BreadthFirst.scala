@@ -1,6 +1,6 @@
 package com.learning.algorithms.tree.traversal
 
-import com.learning.datastructures.mutable.queue.Queue
+import com.learning.data_structures.mutable.queue.Queue
 
 import scala.collection.mutable.ArrayBuffer
 import scala.reflect.ClassTag
