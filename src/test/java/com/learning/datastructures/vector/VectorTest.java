@@ -1,5 +1,6 @@
-package com.learning.datastructures;
+package com.learning.datastructures.vector;
 
+import com.learning.datastructures.vector.Vector;
 import org.junit.Before;
 import org.junit.Test;
 

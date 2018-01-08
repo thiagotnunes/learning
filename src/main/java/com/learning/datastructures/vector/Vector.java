@@ -1,4 +1,4 @@
-package com.learning.datastructures;
+package com.learning.datastructures.vector;
 
 import java.lang.reflect.Array;
 
