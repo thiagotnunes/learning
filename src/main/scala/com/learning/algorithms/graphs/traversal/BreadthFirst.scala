@@ -28,7 +28,7 @@ class BreadthFirst {
                               processEdge: (Edge) => Unit,
                               processNodeLate: (Int) => Unit): Seq[Int] = {
     val queue = new Queue[Int](graph.numberOfVertices) // O(V)
-    val visited = mutable.Set[Int]()
+    val visited = mutable.Set[Int]() // this could be an array of booleans also
     val order = ArrayBuffer[Int]()
 
     queue.enqueue(from) // O(1)
