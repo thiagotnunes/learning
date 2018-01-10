@@ -7,26 +7,18 @@ import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 /**
+  * - V is the number of vertices in the graph
+  * - E is the number of edges in the graph
+  *
   * Time complexity - O(V + E)
   * Space complexity - O(V)
   */
-class BreadthFirst {
-
-  def traverse(graph: Graph)
-              (from: Int): Seq[Int] = {
-    traverseWithSideEffects(graph)(
-      from,
-      (_: Int) => (),
-      (_: Edge) => (),
-      (_: Int) => ()
-    )
-  }
-
-  def traverseWithSideEffects(graph: Graph)
-                             (from: Int,
-                              processNodeEarly: (Int) => Unit,
-                              processEdge: (Edge) => Unit,
-                              processNodeLate: (Int) => Unit): Seq[Int] = {
+class BreadthFirst extends Traversal {
+  override def traverseWithSideEffects(graph: Graph)
+                                      (from: Int,
+                                       processNodeEarly: (Int) => Unit,
+                                       processEdge: (Edge) => Unit,
+                                       processNodeLate: (Int) => Unit): Seq[Int] = {
     val queue = new Queue[Int](graph.numberOfVertices) // O(V)
     val visited = mutable.Set[Int]() // this could be an array of booleans also
     val order = ArrayBuffer[Int]()

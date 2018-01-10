@@ -3,24 +3,18 @@ package com.learning.algorithms.graphs.traversal
 import com.learning.data_structures.mutable.graph.{Edge, Graph}
 
 /**
+  * - V is the number of vertices in the graph
+  * - E is the number of edges in the graph
+  *
   * Time complexity - O(V + E)
   * Space complexity - O(E) due to the recursive calls for each edge
   */
-class DepthFirst {
-  def traverse(graph: Graph)(from: Int): Seq[Int] = {
-    traverseWithSideEffects(graph)(
-      from,
-      (_: Int) => (),
-      (_: Edge) => (),
-      (_: Int) => ()
-    )
-  }
-
-  def traverseWithSideEffects(graph: Graph)
-                             (from: Int,
-                              processNodeEarly: (Int) => Unit,
-                              processEdge: (Edge) => Unit,
-                              processNodeLate: (Int) => Unit): Seq[Int] = {
+class DepthFirst extends Traversal {
+  override def traverseWithSideEffects(graph: Graph)
+                                      (from: Int,
+                                       processNodeEarly: (Int) => Unit,
+                                       processEdge: (Edge) => Unit,
+                                       processNodeLate: (Int) => Unit): Seq[Int] = {
 
     def go(node: Int, visited: Set[Int], order: Seq[Int]): (Set[Int], Seq[Int]) = {
       if (visited.contains(node)) {
