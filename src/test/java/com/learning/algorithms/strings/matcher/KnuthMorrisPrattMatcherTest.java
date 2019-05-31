@@ -3,11 +3,11 @@ package com.learning.algorithms.strings.matcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 public class KnuthMorrisPrattMatcherTest {
@@ -23,7 +23,7 @@ public class KnuthMorrisPrattMatcherTest {
     public void returnsAllMatchesWhenThereAreSome() {
         List<Integer> matches = matcher.match("panamabananas", "ana");
 
-        assertThat(matches, equalTo(Arrays.asList(1, 7, 9)));
+        assertThat(matches, containsInAnyOrder(1, 7, 9));
     }
 
     @Test

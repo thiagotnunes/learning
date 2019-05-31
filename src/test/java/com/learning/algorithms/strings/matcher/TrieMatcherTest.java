@@ -8,15 +8,15 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-class RabinKarpMatcherTest {
+class TrieMatcherTest {
 
-    private RabinKarpMatcher matcher;
+    private TrieMatcher matcher;
 
     @BeforeEach
     public void setUp() {
-        matcher = new RabinKarpMatcher();
+        matcher = new TrieMatcher();
     }
 
     @Test
