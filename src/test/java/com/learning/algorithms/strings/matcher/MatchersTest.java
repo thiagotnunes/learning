@@ -17,6 +17,7 @@ public class MatchersTest {
     public static Object[] matchers() {
         return new Object[]{
                 new NaiveMatcher(),
+                new FiniteAutomataMatcher(),
                 new RabinKarpMatcher(),
                 new KnuthMorrisPrattMatcher(),
                 new SuffixTrieMatcher()
