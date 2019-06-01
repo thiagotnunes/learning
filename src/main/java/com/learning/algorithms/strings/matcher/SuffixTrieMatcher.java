@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class TrieMatcher implements Matcher {
+public class SuffixTrieMatcher implements Matcher {
     /**
      * Time complexity - O(n^2 + m)
      * Space complexity - O(n^2)
@@ -51,5 +51,10 @@ public class TrieMatcher implements Matcher {
         for (Trie.Node next : node.nextNodes()) {
             getPositionsFrom(next, positions);
         }
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
     }
 }

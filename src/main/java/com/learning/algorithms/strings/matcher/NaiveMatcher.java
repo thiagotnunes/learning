@@ -34,4 +34,9 @@ public class NaiveMatcher implements Matcher {
 
         return matches;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
 }

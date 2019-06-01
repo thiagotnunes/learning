@@ -12,14 +12,14 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 @RunWith(Parameterized.class)
-public class MatcherTest {
-    @Parameterized.Parameters(name = "{index} = {0}")
+public class MatchersTest {
+    @Parameterized.Parameters(name = "{0}")
     public static Object[] matchers() {
         return new Object[]{
                 new NaiveMatcher(),
                 new RabinKarpMatcher(),
                 new KnuthMorrisPrattMatcher(),
-                new TrieMatcher()
+                new SuffixTrieMatcher()
         };
     }
 

@@ -60,4 +60,9 @@ public class RabinKarpMatcher implements Matcher {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
 }

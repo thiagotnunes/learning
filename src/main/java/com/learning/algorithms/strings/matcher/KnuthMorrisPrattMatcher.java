@@ -66,4 +66,9 @@ public class KnuthMorrisPrattMatcher implements Matcher {
 
         return kmp;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
 }
