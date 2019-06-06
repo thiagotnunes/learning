@@ -1,5 +1,34 @@
 # Preparation
 
+## Data Structures
+
+### Tries
+
+- [Trie](https://www.youtube.com/watch?v=AXjmTQ8LEoI)
+
+### Strings
+
+- [Coursera Algorithms on Strings](https://www.coursera.org/learn/algorithms-on-strings/home/welcome)
+- [MIT Advanced Data Structures Strings](https://www.youtube.com/watch?v=NinWEPPrkDQ&list=PLUl4u3cNGP61hsJNdULdudlRL493b-XZf&index=16)
+
+#### KMP
+
+- [KMP](https://www.youtube.com/watch?v=GTJr8OvyEVQ&t=0s)
+
+#### Rabin Karp
+
+- [Rabin Karp](https://www.youtube.com/watch?v=H4VrKHVG5qI&t=4s)
+
+#### Suffix Trie
+
+- [Suffix Trie](https://www.youtube.com/watch?v=LB-ANFydv30)
+
+#### Suffix Trees
+
+- [Suffix Trees](https://www.youtube.com/watch?v=hLsrPsFHPcQ)
+- [Ukkonen's Algorithm StackOverflow](https://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english/9513423#9513423)
+- [Ukkonen's Algorithm](https://www.youtube.com/watch?v=aPRqocoBsFQ&t=1362s)
+
 ## Algorithms
 
 ### Books
@@ -18,15 +47,17 @@
 ### Youtube Channels
 
 - [Gate Lectures by Ravindrababu Ravula](https://www.youtube.com/channel/UCJjC1hn78yZqTf0vdTC6wAQ)
+- [WilliamFiset](https://www.youtube.com/user/purpongie/videos)
 - [Tushar Roy Channel](https://www.youtube.com/user/tusharroy2525)
 - [Algorithms Live](https://www.youtube.com/channel/UCBLr7ISa_YDy5qeATupf26w)
 - [MIT Introduction to Algorithms 6006](https://www.youtube.com/watch?v=HtSuA80QTyo&list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb)
 - [MIT Design and Analysis of Algorithms 6046](https://www.youtube.com/watch?v=2P-yW7LQr08&list=PLUl4u3cNGP6317WaSNfmCvGym2ucw3oGp)
-- [Geeks for Geeks](https://www.youtube.com/channel/UC0RhatS1pyxInC00YKjjBqQ)
+- [MIT Advanced Data Structures 6851](https://www.youtube.com/watch?v=T0yzrZL1py0&list=PLUl4u3cNGP61hsJNdULdudlRL493b-XZf)
 
 ### Practicing
 
 - [HackerRank](https://www.hackerrank.com/dashboard)
+- [AlgoExpert](https://www.algoexpert.io/)
 
 ## System Design
 
