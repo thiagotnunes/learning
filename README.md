@@ -2,9 +2,105 @@
 
 ## Data Structures
 
+### Arrays
+
+### Linked Lists
+
+### Stacks
+
+### Queues
+
+### Hash Maps
+
+### Union-Find Disjoint Sets
+
+### Binary Search Trees
+
+- Unbalanced
+- AVL
+- Red Black
+
+### Heaps
+
+### Binary Indexed Trees (Fenwick Trees)
+
+### Segment Trees
+
 ### Tries
 
 - [Trie](https://www.youtube.com/watch?v=AXjmTQ8LEoI)
+- [Suffix Trie](https://www.youtube.com/watch?v=LB-ANFydv30)
+
+### Suffix Trees
+
+- [Suffix Trees](https://www.youtube.com/watch?v=hLsrPsFHPcQ)
+- [Ukkonen's Algorithm StackOverflow](https://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english/9513423#9513423)
+- [Ukkonen's Algorithm](https://www.youtube.com/watch?v=aPRqocoBsFQ&t=1362s)
+
+### Graphs
+
+- Matrix
+- Adjacency List
+
+## Algorithms
+
+### Bit Operations
+
+### Sorting
+
+#### Bubble Sort
+
+#### Selection Sort
+
+#### Insertion Sort
+
+#### Heap Sort
+
+#### Merge Sort
+
+#### Quick Sort
+
+#### Counting Sort
+
+#### Bucket Sort
+
+#### Radix Sort
+
+### Searching
+
+#### Linear Search
+
+#### Binary Search
+
+### Graph
+
+#### BFS
+
+#### DFS
+
+#### Topological Sort
+
+- Degree Based
+- DFS
+
+#### Single Source Shortest Path
+
+- BFS
+- Dijkstra
+- Bellman-Ford
+
+#### All Pairs Shortest Path
+
+- Floyd Warshall
+
+#### Minimal Spanning Trees
+
+- Kruskal's
+- Prim's
+
+#### Strongly Connected Components
+
+#### Traveling Salesman
 
 ### Strings
 
@@ -19,17 +115,15 @@
 
 - [Rabin Karp](https://www.youtube.com/watch?v=H4VrKHVG5qI&t=4s)
 
-#### Suffix Trie
+### Number Theory
 
-- [Suffix Trie](https://www.youtube.com/watch?v=LB-ANFydv30)
+#### Sieve of Eratosthenes
 
-#### Suffix Trees
+### Other
 
-- [Suffix Trees](https://www.youtube.com/watch?v=hLsrPsFHPcQ)
-- [Ukkonen's Algorithm StackOverflow](https://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english/9513423#9513423)
-- [Ukkonen's Algorithm](https://www.youtube.com/watch?v=aPRqocoBsFQ&t=1362s)
+#### Permutations
 
-## Algorithms
+#### Combinations
 
 ### Books
 
