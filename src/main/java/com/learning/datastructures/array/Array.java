@@ -19,6 +19,10 @@ public class Array<T> {
         this.elements = (T[]) java.lang.reflect.Array.newInstance(clazz, capacity);
     }
 
+    public void add(T e) {
+        addLast(e);
+    }
+
     /**
      * Time complexity - O(1)
      * Space complexity - O(1)
@@ -67,12 +71,31 @@ public class Array<T> {
     }
 
     /**
+     * Time complexity - O(n)
+     * Space complexity - O(1)
+     */
+    public T removeFirst() {
+        if (size == 0) return null;
+
+        T value = elements[0];
+        if (size - 1 >= 0) System.arraycopy(elements, 1, elements, 0, size - 1);
+        size--;
+
+        return value;
+    }
+
+    /**
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
-    public void removeLast() {
+    public T removeLast() {
+        if (size == 0) return null;
+
+        T value = elements[size - 1];
         size--;
         tryShrink();
+
+        return value;
     }
 
     /**
