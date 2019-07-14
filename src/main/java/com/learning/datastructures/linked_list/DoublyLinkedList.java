@@ -1,6 +1,6 @@
 package com.learning.datastructures.linked_list;
 
-public class DoublyLinkedList<T> {
+public class DoublyLinkedList<T> implements LinkedList<T> {
     private Node<T> head;
     private Node<T> tail;
     private int size;
@@ -27,14 +27,7 @@ public class DoublyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
-    public void add(T e) {
-        addFirst(e);
-    }
-
-    /**
-     * Time complexity - O(1)
-     * Space complexity - O(1)
-     */
+    @Override
     public void addFirst(T e) {
         Node<T> newNode = new Node<>(e);
         if (head == null) {
@@ -52,6 +45,7 @@ public class DoublyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
+    @Override
     public void addLast(T e) {
         Node<T> newNode = new Node<>(e);
         if (tail == null) {
@@ -69,14 +63,7 @@ public class DoublyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
-    public T get() {
-        return getFirst();
-    }
-
-    /**
-     * Time complexity - O(1)
-     * Space complexity - O(1)
-     */
+    @Override
     public T getFirst() {
         return head == null ? null : head.value;
     }
@@ -85,6 +72,7 @@ public class DoublyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
+    @Override
     public T getLast() {
         return tail == null ? null : tail.value;
     }
@@ -93,14 +81,7 @@ public class DoublyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
-    public T remove() {
-        return removeFirst();
-    }
-
-    /**
-     * Time complexity - O(1)
-     * Space complexity - O(1)
-     */
+    @Override
     public T removeFirst() {
         if (head == null) return null;
 
@@ -116,6 +97,7 @@ public class DoublyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
+    @Override
     public T removeLast() {
         if (tail == null) return null;
 
@@ -131,6 +113,7 @@ public class DoublyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
+    @Override
     public int size() {
         return size;
     }
@@ -139,6 +122,7 @@ public class DoublyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }

@@ -1,6 +1,6 @@
 package com.learning.datastructures.linked_list;
 
-public class SinglyLinkedList<T> {
+public class SinglyLinkedList<T> implements LinkedList<T> {
     private Node<T> head;
     private Node<T> tail;
     private int size;
@@ -9,6 +9,7 @@ public class SinglyLinkedList<T> {
      * Time complexity - O(n)
      * Space complexity - O(n)
      */
+    @SafeVarargs
     public static <T> SinglyLinkedList<T> of(T... elements) {
         SinglyLinkedList<T> list = new SinglyLinkedList<>();
 
@@ -27,14 +28,7 @@ public class SinglyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
-    public void add(T e) {
-        addFirst(e);
-    }
-
-    /**
-     * Time complexity - O(1)
-     * Space complexity - O(1)
-     */
+    @Override
     public void addFirst(T e) {
         Node<T> newNode = new Node<>(e);
         if (head == null) {
@@ -51,6 +45,7 @@ public class SinglyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
+    @Override
     public void addLast(T e) {
         Node<T> newNode = new Node<>(e);
         if (tail == null) {
@@ -67,6 +62,7 @@ public class SinglyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
+    @Override
     public T getFirst() {
         return head == null ? null : head.value;
     }
@@ -75,6 +71,7 @@ public class SinglyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
+    @Override
     public T getLast() {
         return tail == null ? null : tail.value;
     }
@@ -83,14 +80,7 @@ public class SinglyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
-    public T remove() {
-        return removeFirst();
-    }
-
-    /**
-     * Time complexity - O(1)
-     * Space complexity - O(1)
-     */
+    @Override
     public T removeFirst() {
         if (head == null) return null;
 
@@ -106,6 +96,7 @@ public class SinglyLinkedList<T> {
      * Time complexity - O(n)
      * Space complexity - O(1)
      */
+    @Override
     public T removeLast() {
         if (tail == null) return null;
 
@@ -130,6 +121,7 @@ public class SinglyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
+    @Override
     public int size() {
         return size;
     }
@@ -138,6 +130,7 @@ public class SinglyLinkedList<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
