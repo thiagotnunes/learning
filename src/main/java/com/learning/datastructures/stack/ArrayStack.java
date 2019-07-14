@@ -42,7 +42,7 @@ public class ArrayStack<T> implements Stack<T> {
     public T peek() {
         if (elements.isEmpty()) throw new IllegalStateException("can not peek from empty stack");
 
-        return elements.get(elements.size() - 1);
+        return elements.getLast();
     }
 
     /**
