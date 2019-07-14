@@ -1,6 +1,6 @@
 package com.learning.datastructures.queue;
 
-import com.learning.datastructures.linked_list.SinglyLinkedList;
+import com.learning.datastructures.linkedlist.SinglyLinkedList;
 
 public class LinkedListQueue<T> implements Queue<T> {
     private final SinglyLinkedList<T> elements;

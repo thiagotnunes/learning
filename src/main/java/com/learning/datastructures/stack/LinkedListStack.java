@@ -1,6 +1,6 @@
 package com.learning.datastructures.stack;
 
-import com.learning.datastructures.linked_list.SinglyLinkedList;
+import com.learning.datastructures.linkedlist.SinglyLinkedList;
 
 public class LinkedListStack<T> implements Stack<T> {
 

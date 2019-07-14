@@ -1,6 +1,6 @@
-package com.learning.datastructures.linked_list;
+package com.learning.datastructures.linkedlist;
 
-public class SinglyLinkedList<T> implements LinkedList<T> {
+public class DoublyLinkedList<T> implements LinkedList<T> {
     private Node<T> head;
     private Node<T> tail;
     private int size;
@@ -9,9 +9,8 @@ public class SinglyLinkedList<T> implements LinkedList<T> {
      * Time complexity - O(n)
      * Space complexity - O(n)
      */
-    @SafeVarargs
-    public static <T> SinglyLinkedList<T> of(T... elements) {
-        SinglyLinkedList<T> list = new SinglyLinkedList<>();
+    public static <T> DoublyLinkedList<T> of(T... elements) {
+        DoublyLinkedList<T> list = new DoublyLinkedList<>();
 
         for (int i = elements.length - 1; i >= 0; i--) {
             list.addFirst(elements[i]);
@@ -20,8 +19,8 @@ public class SinglyLinkedList<T> implements LinkedList<T> {
         return list;
     }
 
-    public SinglyLinkedList() {
-        size = 0;
+    public DoublyLinkedList() {
+        this.size = 0;
     }
 
     /**
@@ -33,9 +32,10 @@ public class SinglyLinkedList<T> implements LinkedList<T> {
         Node<T> newNode = new Node<>(e);
         if (head == null) {
             head = newNode;
-            tail = head;
+            tail = newNode;
         } else {
             newNode.next = head;
+            head.prev = newNode;
             head = newNode;
         }
         size++;
@@ -50,10 +50,11 @@ public class SinglyLinkedList<T> implements LinkedList<T> {
         Node<T> newNode = new Node<>(e);
         if (tail == null) {
             head = newNode;
-            tail = head;
+            tail = newNode;
         } else {
             tail.next = newNode;
-            tail = tail.next;
+            newNode.prev = tail;
+            tail = newNode;
         }
         size++;
     }
@@ -93,7 +94,7 @@ public class SinglyLinkedList<T> implements LinkedList<T> {
     }
 
     /**
-     * Time complexity - O(n)
+     * Time complexity - O(1)
      * Space complexity - O(1)
      */
     @Override
@@ -101,18 +102,9 @@ public class SinglyLinkedList<T> implements LinkedList<T> {
         if (tail == null) return null;
 
         T value = tail.value;
+        tail = tail.prev;
         size--;
-        if (size == 0) {
-            head = null;
-            tail = null;
-        } else {
-            Node<T> current = head;
-            while (current.next != tail) {
-                current = current.next;
-            }
-            current.next = null;
-            tail = current;
-        }
+        if (size == 0) head = null;
 
         return value;
     }
@@ -137,6 +129,7 @@ public class SinglyLinkedList<T> implements LinkedList<T> {
 
     private static class Node<T> {
         T value;
+        Node<T> prev;
         Node<T> next;
 
         Node(T value) {

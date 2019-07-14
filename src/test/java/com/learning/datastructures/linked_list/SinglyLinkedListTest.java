@@ -1,5 +1,6 @@
 package com.learning.datastructures.linked_list;
 
+import com.learning.datastructures.linkedlist.SinglyLinkedList;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;

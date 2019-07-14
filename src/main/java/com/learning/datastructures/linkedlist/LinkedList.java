@@ -1,4 +1,4 @@
-package com.learning.datastructures.linked_list;
+package com.learning.datastructures.linkedlist;
 
 public interface LinkedList<T> {
     default void add(T e) {

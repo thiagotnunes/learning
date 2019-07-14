@@ -1,6 +1,6 @@
-package com.learning.datastructures.linked_list;
+package com.learning.datastructures.linkedlist;
 
-public class DoublyLinkedList<T> implements LinkedList<T> {
+public class SinglyLinkedList<T> implements LinkedList<T> {
     private Node<T> head;
     private Node<T> tail;
     private int size;
@@ -9,8 +9,9 @@ public class DoublyLinkedList<T> implements LinkedList<T> {
      * Time complexity - O(n)
      * Space complexity - O(n)
      */
-    public static <T> DoublyLinkedList<T> of(T... elements) {
-        DoublyLinkedList<T> list = new DoublyLinkedList<>();
+    @SafeVarargs
+    public static <T> SinglyLinkedList<T> of(T... elements) {
+        SinglyLinkedList<T> list = new SinglyLinkedList<>();
 
         for (int i = elements.length - 1; i >= 0; i--) {
             list.addFirst(elements[i]);
@@ -19,8 +20,8 @@ public class DoublyLinkedList<T> implements LinkedList<T> {
         return list;
     }
 
-    public DoublyLinkedList() {
-        this.size = 0;
+    public SinglyLinkedList() {
+        size = 0;
     }
 
     /**
@@ -32,10 +33,9 @@ public class DoublyLinkedList<T> implements LinkedList<T> {
         Node<T> newNode = new Node<>(e);
         if (head == null) {
             head = newNode;
-            tail = newNode;
+            tail = head;
         } else {
             newNode.next = head;
-            head.prev = newNode;
             head = newNode;
         }
         size++;
@@ -50,11 +50,10 @@ public class DoublyLinkedList<T> implements LinkedList<T> {
         Node<T> newNode = new Node<>(e);
         if (tail == null) {
             head = newNode;
-            tail = newNode;
+            tail = head;
         } else {
             tail.next = newNode;
-            newNode.prev = tail;
-            tail = newNode;
+            tail = tail.next;
         }
         size++;
     }
@@ -94,7 +93,7 @@ public class DoublyLinkedList<T> implements LinkedList<T> {
     }
 
     /**
-     * Time complexity - O(1)
+     * Time complexity - O(n)
      * Space complexity - O(1)
      */
     @Override
@@ -102,9 +101,18 @@ public class DoublyLinkedList<T> implements LinkedList<T> {
         if (tail == null) return null;
 
         T value = tail.value;
-        tail = tail.prev;
         size--;
-        if (size == 0) head = null;
+        if (size == 0) {
+            head = null;
+            tail = null;
+        } else {
+            Node<T> current = head;
+            while (current.next != tail) {
+                current = current.next;
+            }
+            current.next = null;
+            tail = current;
+        }
 
         return value;
     }
@@ -129,7 +137,6 @@ public class DoublyLinkedList<T> implements LinkedList<T> {
 
     private static class Node<T> {
         T value;
-        Node<T> prev;
         Node<T> next;
 
         Node(T value) {
