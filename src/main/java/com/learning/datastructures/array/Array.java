@@ -19,19 +19,12 @@ public class Array<T> {
         this.elements = (T[]) java.lang.reflect.Array.newInstance(clazz, capacity);
     }
 
-    public void add(T e) {
-        addLast(e);
-    }
-
     /**
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
-    public void addLast(T e) {
-        tryExpand();
-
-        elements[size] = e;
-        size++;
+    public void add(T e) {
+        addLast(e);
     }
 
     /**
@@ -54,6 +47,17 @@ public class Array<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
+    public void addLast(T e) {
+        tryExpand();
+
+        elements[size] = e;
+        size++;
+    }
+
+    /**
+     * Time complexity - O(1)
+     * Space complexity - O(1)
+     */
     public T get(int i) {
         if (i >= size) throw new ArrayIndexOutOfBoundsException(i);
 
@@ -64,10 +68,34 @@ public class Array<T> {
      * Time complexity - O(1)
      * Space complexity - O(1)
      */
+    public T getFirst() {
+        return get(0);
+    }
+
+    /**
+     * Time complexity - O(1)
+     * Space complexity - O(1)
+     */
+    public T getLast() {
+        return get(size - 1);
+    }
+
+    /**
+     * Time complexity - O(1)
+     * Space complexity - O(1)
+     */
     public void set(int i, T e) {
         if (i >= size) throw new ArrayIndexOutOfBoundsException(i);
 
         elements[i] = e;
+    }
+
+    /**
+     * Time complexity - O(n)
+     * Space complexity - O(1)
+     */
+    public T remove() {
+        return removeLast();
     }
 
     /**
